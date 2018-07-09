@@ -24,6 +24,8 @@ _This is the cool part, and what we'll be learning about_
 
 # The type system
 
+##
+
 ```tut:fail
 val a: Int = "hola!"
 ```
