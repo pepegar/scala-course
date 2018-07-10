@@ -1,3 +1,8 @@
+# Scala basics 2
+
+In this session we'll deepen our knowledge of pattern matching &
+recursion!
+
 # Pattern matching
 
 ##
@@ -10,7 +15,7 @@ like a more powerful `switch` statement.
 
 it's used the following way:
 
-```tut
+```tut:silent
 val a: Int = 3
 
 a match {
@@ -19,14 +24,15 @@ a match {
 }
 ```
 
-## Exhaustivity
+# Exhaustivity
 
-One of the cool things of scala's pattern matching is that it has an
-exhaustivity checker.  This means that, if we're using pattern
-matching agains a `sealed trait`, the compiler will warn if we forget
-to match against one of the cases.
+##
 
-## Exhaustivity
+Scala's pattern matching has an exhaustivity checker.  This means
+that, the compiler will warn if we forget to match against one of the
+cases.
+
+##
 
 ```tut:silent
 sealed trait Color
@@ -35,13 +41,13 @@ case object Red extends Color
 case class Other(name: String) extends Color
 ```
 
-## Exhaustivity
+##
 
 ```tut:silent
 val color: Color = Blue
 ```
 
-## Exhaustivity
+##
 
 WARNING:
 
@@ -52,11 +58,11 @@ color match {
 }
 ```
 
-## Destructuring
+# Destructuring
 
 Destructuring allows us to query inner parts of an ADT
 
-## Destructuring
+##
 
 ```tut:silent
 sealed trait Vehicle
@@ -64,13 +70,13 @@ case class Car(brand: String, model: String, color: Color) extends Vehicle
 case class Plane(brand: String, model: String, wingSpan: Int) extends Vehicle
 ```
 
-## Destructuring
+##
 
-```tut
+```tut:silent
 val vehicle: Vehicle = Car("Honda", "Accord", Red)
 ```
 
-## Destructuring
+##
 
 ```tut
 vehicle match {
@@ -81,19 +87,19 @@ vehicle match {
 }
 ```
 
-## Guards
+# Guards
 
-Guards are boolean conditions we want to check in a pattern matching:
+boolean conditions we want to check
 
-## Guards
+##
 
 given
 
-```tut
+```tut:silent
 val plane: Vehicle = Plane("Boeing", "747", 47)
 ```
 
-## Guards
+##
 
 ```tut
 plane match {
@@ -101,4 +107,74 @@ plane match {
   case Plane(brand, model, wingSpan) if wingSpan <= 40 => s"it's a small $brand $model"
   case _ => s"it's not a plane..."
 }
+```
+
+# Recursion
+
+##
+
+Recursion happens when a function calls itself.  It's the solution we
+use in functional programming to the problems for which OOP uses
+loops.
+
+## Fibonacci sequence
+
+Fibonacci sequence is an infinite in which every number is defined by
+summing the two previous numbers.
+
+## Fibonacci in Python
+
+```python
+def fib(num):
+    a = 1
+    b = 0
+    temp = 0
+    while(num >= 0):
+        temp = a
+        a = a+b
+        b = temp
+        num = num - 1
+    return b
+```
+
+## Fibonacci in Scala
+
+```tut:silent
+def fib(num: Int): Int = num match {
+  case 0 => 1
+  case 1 => 1
+  case x => fib(x - 1) + fib(x - 2)
+}
+```
+
+##
+
+Recursion is tightly coupled to pattern matching
+
+##
+
+```tut:silent
+sealed trait List[A]
+case class Empty[A]() extends List[A]
+case class NonEmpty[A](head: A, tail: List[A]) extends List[A]
+```
+
+##
+
+Let's see some common functions implemented recursively on a `List`!
+
+##
+
+```tut:silent
+def length[A](l: List[A]): Int = l match {
+  case Empty() => 0
+  case NonEmpty(x, xs) => 1 + length(xs)
+}
+```
+
+##
+
+```tut
+val three = NonEmpty(1, NonEmpty(2, NonEmpty(3, Empty())))
+length(three)
 ```

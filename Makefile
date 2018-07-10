@@ -15,7 +15,7 @@ basics2:
           --template=default.revealjs --standalone --section-divs \
           --variable theme="beige" --variable transition="linear" \
           tut-out/basics2.md -o tut-out/basics2.html
-	@echo "- converting basics1.md to basics2.html"
+	@echo "- converting basics2.md to basics2.html"
 
 tut:
 	$(SBT) tut
