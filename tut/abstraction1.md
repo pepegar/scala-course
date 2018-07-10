@@ -1,17 +1,26 @@
-# Functions
+# Pure functions
 
 In functional programming we say that functions have some special
 features.
 
+# They're values
+
+Functions can be treated as any other value in your program. They can
+be assigned to `val`s, returned from methods, taken as parameters...
+
 # Purity
 
-#
+##
 
 They're pure, meaning that they perform no side effects
 
-# Referential transparency
+## Side effects
 
-#
+- Throwing exceptions
+- IO
+- mutating variables
+
+# Referential transparency
 
 They're referentially transparent.  We can safely substitute any
 function call with its return value and it won't have any effect in
@@ -19,10 +28,14 @@ the overall program.
 
 # Totality
 
-#
+##
 
 They're total.  Functions should operate on all values from it's input
 type. If they fail with an input, they're not total.
+
+##
+
+When a function is not total, we say it's partial.
 
 # Examples
 
@@ -109,11 +122,15 @@ def toString(id: Int): String = id match {
 
 Is this pure?
 
-<p class="fragment">Nope, it's side effectful!</p>
+<p class="fragment">Nope, it's partial!</p>
 
-## Recap
+# Recap
+
+##
 
 Yesterday we implemented a binary tree
+
+##
 
 ```tut:silent
 sealed trait Tree[A]
