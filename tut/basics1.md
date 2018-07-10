@@ -215,7 +215,7 @@ making programs inmutable!
 
 ```tut:silent
 // This is a package of 10x15x20cm and 3 kilograms
-val package = Package(10, 15, 20, 3)
+val pack = Package(10, 15, 20, 3)
 ```
 ## Case classes
 
@@ -223,7 +223,7 @@ If we want to change one of the fields of a case class, we just need
 to call copy and reassign a new value for the field:
 
 ```tut:silent
-val package2 = package.copy(weight = 2)
+val pack2 = pack.copy(weight = 2)
 ```
 ## Sealed traits
 
