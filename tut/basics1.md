@@ -205,6 +205,26 @@ case class Package(length: Int, width: Int, height: Int, weight: Int)
 In this example we know that all packages should have a length, a
 width, a height, and a weight.
 
+## Case classes
+
+Case classes have other cool feature, copying.  Copying allows us to
+create copies of the object with some fields changed.  This helps
+making programs inmutable!
+
+## Case classes
+
+```tut:silent
+// This is a package of 10x15x20cm and 3 kilograms
+val package = Package(10, 15, 20, 3)
+```
+## Case classes
+
+If we want to change one of the fields of a case class, we just need
+to call copy and reassign a new value for the field:
+
+```tut:silent
+val package2 = package.copy(weight = 2)
+```
 ## Sealed traits
 
 Sealed traits (also called sum types) encode a type that can be **one
