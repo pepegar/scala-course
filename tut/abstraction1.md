@@ -211,6 +211,8 @@ def squared(tree: Tree[Int]): Tree[Int] = tree match {
 squared(myTree)
 ```
 
+# Exercise!
+
 ## Identifying common functions
 
 The pattern we've identified here is called `fold`, or more
