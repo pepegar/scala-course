@@ -29,7 +29,7 @@ a match {
 ##
 
 Scala's pattern matching has an exhaustivity checker.  This means
-that, the compiler will warn if we forget to match against one of the
+that the compiler will warn if we forget to match against one of the
 cases.
 
 ##
@@ -163,18 +163,124 @@ case class NonEmpty[A](head: A, tail: List[A]) extends List[A]
 
 Let's see some common functions implemented recursively on a `List`!
 
-##
-
-```tut:silent
-def length[A](l: List[A]): Int = l match {
-  case Empty() => 0
-  case NonEmpty(x, xs) => 1 + length(xs)
-}
+```tut
+val three = NonEmpty(1, NonEmpty(2, NonEmpty(3, Empty())))
 ```
 
 ##
 
 ```tut
-val three = NonEmpty(1, NonEmpty(2, NonEmpty(3, Empty())))
+def length[A](l: List[A]): Int = l match {
+  case Empty() => 0
+  case NonEmpty(x, xs) => 1 + length(xs)
+}
+
 length(three)
+```
+
+##
+
+```tut
+def sum(list: List[Int]): Int = list match {
+  case Empty() => 0
+  case NonEmpty(x, xs) => x + sum(xs)
+}
+```
+
+# Exercise 1
+
+Implement a generic binary tree data structure.
+
+#
+
+## Solution
+
+```tut:silent
+sealed trait Tree[A]
+case class Empty[A]() extends Tree[A]
+case class Node[A](l: Tree[A], a: A, r: Tree[A]) extends Tree[A]
+```
+
+# Exercise 2
+
+create a function to calculate the height of a tree.
+
+#
+
+## Solution
+
+```tut
+def height[A](tree: Tree[A]): Int = tree match {
+  case Empty() => 0
+  case Node(l, _, r) => 1 + (height(l).max(height(r)))
+}
+```
+
+# Exercise 3
+
+Create a function that sums all the leaves of an Int tree.
+
+#
+
+## Solution
+
+
+```tut
+def sum(tree: Tree[Int]): Int = tree match {
+  case Empty() => 0
+  case Node(l, x, r) => x + sum(l) + sum(r)
+}
+```
+
+# Exercise 4
+
+Create a function that counts all the leaves in a tree
+
+#
+
+## Solution
+
+```tut
+def count[A](tree: Tree[A]): Int = tree match {
+  case Empty() => 0
+  case Node(l, _, r) => 1 + count(l) + count(r)
+}
+```
+
+# Exercise 5
+
+Create a function that transforms each element in a tree into it's
+string representation
+
+#
+
+## Solution
+
+```tut
+def toStringNodes(tree: Tree[Int]): Tree[String] = tree match {
+  case Empty() => Empty()
+  case Node(l, x, r) => Node(
+    toStringNodes(l),
+	x.toString,
+	toStringNodes(r))
+}
+```
+
+
+# Exercise 6
+
+Create a function that squares all elements in an Int tree
+
+#
+
+## Solution
+
+```tut
+def squared(tree: Tree[Int]): Tree[Int] = tree match {
+  case Empty() => Empty()
+  case Node(l, x, r) => Node(
+    squared(l),
+	x * x,
+	squared(r))
+}
 ```
