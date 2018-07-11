@@ -14,11 +14,16 @@ be assigned to `val`s, returned from methods, taken as parameters...
 
 They're pure, meaning that they perform no side effects
 
+##
+
+given the same input, always return the same output
+
 ## Side effects
 
 - Throwing exceptions
 - IO
 - mutating variables
+- Random
 
 # Referential transparency
 
@@ -450,6 +455,12 @@ def httpConnection: Option[String] = {
   }
 }
 ```
+
+##
+
+You can construct options with its two constrcutors `Some` & `None`,
+and you can also use the `Option` constructor, that will convert nulls
+in `None` if they occur
 
 #
 
