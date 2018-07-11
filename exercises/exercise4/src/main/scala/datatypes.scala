@@ -32,10 +32,6 @@ object option {
   /**
     * reimplement this using try
     */
-  def useTry = try {
-    stringOrThrow
-  } catch {
-    case e: Exception => throw e
-  }
+  def useTry = Try(stringOrThrow)
 
 }
