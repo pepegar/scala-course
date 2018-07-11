@@ -418,7 +418,7 @@ with common tasks.
 
 Option is used when something may be not present. Use it whenever you'd use null `null`.
 
-s##
+##
 
 ```tut:invisible
 val hostDefined = false
