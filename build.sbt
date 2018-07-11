@@ -12,6 +12,13 @@ lazy val exercise3 = project
 lazy val exercise4 = project
   .in(file("exercises/exercise4"))
 
+lazy val exercise5 = project
+  .in(file("exercises/exercise5"))
+  .dependsOn(exercise3)
+  .settings(
+    libraryDependencies += "org.typelevel" %% "cats-core" % "1.1.0"
+  )
+
 lazy val docs = project
   .in(file("docs"))
   .settings(

@@ -108,7 +108,7 @@ There are lots of typeclasses libraries for Scala, but we'll use
 ##
 
 We've already seen a very common typeclass in our examples, `Sumable`.
-It's called `Semigroup` normally in Functional programming.
+It's normally called `Semigroup` in Functional programming.
 
 # Semigroup
 
@@ -168,6 +168,16 @@ implicit val booleanAndMonoid: Monoid[Boolean] = new Monoid[Boolean] {
 }
 ```
 
+##
+
+Now that we have `identity` we can add a couple of more laws to Monoid:
+
+```
+sum(a, sum(b, c)) == sum(sum(a, b), c) // associativity
+sum(a, identity) == a // right identity
+sum(identity, a) == a // left identity
+```
+
 # Eq
 
 ##
@@ -211,8 +221,8 @@ trait Show[A] {
 
 ##
 
-Is a typeclass that for type constructors (as opposed to the previous
-ones we've seen) that can be mapped over. Let's see how it's declared.
+Is a typeclass whose type parameter is a type constructor that
+can be mapped over. Let's see how it's declared.
 
 ##
 
@@ -254,3 +264,5 @@ trait Monad[F[_]] extends Applicative[F] {
   def flatMap[A, B](fn: A => F[B])(fa: F[A]): F[B]
 }
 ```
+
+# Exercise 5
