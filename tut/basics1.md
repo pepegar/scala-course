@@ -58,8 +58,12 @@ a = 3
 
 ## Scala
 
+```tut:silent
+var a = "patata"
+```
+
 ```tut:fail
-val a: Int = "hola!"
+a = 3
 ```
 
 # Type inference
