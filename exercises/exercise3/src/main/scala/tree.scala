@@ -21,35 +21,23 @@ object Tree {
   /**
     * Refactor all the functions we implemented with primitive recursion 
     */
-  def height[A](tree: Tree[A]): Int = tree match {
-    case Empty() => 0
-    case Node(l, _, r) => 1 + (height(l).max(height(r)))
-  }
+  def height[A](tree: Tree[A]): Int = fold(tree)(0, { (l: Int, _: A, r: Int) =>
+    1 + (l.max(r))
+  })
 
-  def sum(tree: Tree[Int]): Int = tree match {
-    case Empty() => 0
-    case Node(l, x, r) => x + sum(l) + sum(r)
-  }
+  def sum(tree: Tree[Int]): Int = fold(tree)(0, { (l: Int, a: Int, r: Int) =>
+    l + a + r
+  })
 
-  def count[A](tree: Tree[A]): Int =  tree match {
-    case Empty() => 0
-    case Node(l, _, r) => 1 + count(l) + count(r)
-  }
+  def count[A](tree: Tree[A]): Int = fold(tree)(0, { (l: Int, _: A, r: Int) =>
+    1 + l + r
+  })
 
-  def toStringNodes(tree: Tree[Int]): Tree[String] = tree match {
-    case Empty() => Empty()
-    case Node(l, x, r) => Node(
-      toStringNodes(l),
-      x.toString,
-      toStringNodes(r))
-  }
+  def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
+    Node[String](l, a.toString, r)
+  })
 
-  def squared(tree: Tree[Int]): Tree[Int] = tree match {
-    case Empty() => Empty()
-    case Node(l, x, r) => Node(
-      squared(l),
-      x * x,
-      squared(r))
-  }
-
+  def squared(tree: Tree[Int]): Tree[Int] = fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
+    Node[Int](l, a * a, r)
+  })
 }
