@@ -38,7 +38,7 @@ object option {
   case class User()
 
   /**
-    *
+    * reimplement using Either[User, Client]
     */
   def userOrClient: Either[User, Client] = if (hasBoughtBefore) {
     Right(Client())
