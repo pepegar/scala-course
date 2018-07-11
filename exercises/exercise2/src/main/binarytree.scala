@@ -8,3 +8,5 @@ package exercise2
   * an two children at most.
   */
 sealed trait Tree[A]
+case class Empty[A]() extends Tree[A]
+case class Node[A](l: Tree[A], a: A, r: Tree[A]) extends Tree[A]
