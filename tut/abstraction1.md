@@ -213,6 +213,11 @@ squared(myTree)
 
 # Exercise!
 
+##
+
+Can you create a higher order function with the common parts of
+previous functions?
+
 ## Identifying common functions
 
 The pattern we've identified here is called `fold`, or more
@@ -305,7 +310,7 @@ value of the nodes, but leaving the structure intact.
 
 That's a `map`! and we can implement it based on `fold`!
 
-##
+## map
 
 ```tut
 def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] = fold(tree)(Empty[B](), { (l: Tree[B], a: A, r: Tree[B]) =>
@@ -333,4 +338,69 @@ def squaredWithMap(tree: Tree[Int]): Tree[Int] = map(tree)(x => x*x)
 squaredWithMap(myTree)
 ```
 
+# Identifying functional patterns
+
 #
+
+##
+
+That's all we've done in these last examples, find repetitions and try
+to abstract them.  That's what FP is about!
+
+##
+
+There are some well know abstractions we should be aware of
+
+# fold
+
+##
+
+`fold` consumes a structure `F[_]` and produces a value out of it
+
+```tut:silent
+def fold[F[_], A, B](f: F[A])(onEmpty: B, onNode: (B, A, B) => B): B = ???
+```
+
+# map
+
+##
+
+`map` transforms each element given a function `A => B`
+
+```tut:silent
+def map[F[_], A, B](f: F[A])(fn: A => B): F[B] = ???
+```
+
+# flatMap
+
+##
+
+`flatMap` is similar to `map`, but the lambda we pass to it returns a
+`F[B]` instead of a `B`
+
+```tut:silent
+def flatMap[F[_], A, B](f: F[A])(fn: A => F[B]): F[B] = ???
+```
+
+# filter
+
+##
+
+`filter` returns a new structure `F[_]` with elements that doesn't adjust to a
+predicate `fn: A => Boolean` filtered out.
+
+```tut:silent
+def filter[F[_], A](f: F[A])(fn: A => Boolean): F[A] = ???
+```
+
+# Find
+
+##
+
+`find` returns the first element in a structure `F[_]` that matches a predicate.
+
+```tut:silent
+def filter[F[_], A](f: F[A])(fn: A => Boolean): Option[A] = ???
+```
+
+
