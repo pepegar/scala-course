@@ -144,7 +144,7 @@ case class Node[A](l: Tree[A], a: A, r: Tree[A]) extends Tree[A]
 val myTree = Node(Node(Empty(),2,Empty()),1,Node(Node(Empty(),4,Empty()),3,Node(Node(Empty(),6,Empty()),5,Node(Empty(),7,Empty()))))
 ```
 
-## 
+##
 
 Abstraction is the ultimate goal of functional programming.  If you
 see the implementations we ended up creating for yesterday's
@@ -247,7 +247,7 @@ def fold[A, B](tree: Tree[A])(onEmpty: B, onNode: (B, A, B) => B): B = tree matc
 }
 ```
 
-## 
+##
 
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
@@ -403,4 +403,148 @@ def filter[F[_], A](f: F[A])(fn: A => Boolean): F[A] = ???
 def filter[F[_], A](f: F[A])(fn: A => Boolean): Option[A] = ???
 ```
 
+# functional datatypes
 
+##
+
+##
+
+There are some datatypes in the scala standard library that help a lot
+with common tasks.
+
+# Option
+
+##
+
+Option is used when something may be not present. Use it whenever you'd use null `null`.
+
+##
+
+```tut:invisible
+val hostDefined = false
+val getHost = ""
+```
+
+With nulls:
+
+```tut:silent
+def httpConnection: String = {
+  if (hostDefined) {
+    getHost
+  } else {
+    null
+  }
+}
+```
+
+##
+
+With option:
+
+```tut:silent
+def httpConnection: Option[String] = {
+  if (hostDefined) {
+    Some(getHost)
+  } else {
+    None
+  }
+}
+```
+
+# Try
+
+##
+
+Try captures exceptions and represents them as `Failure`s instead of
+throwing them!
+
+##
+
+without `Try`:
+
+```tut
+def user: String = try {
+  findUser(3)
+} catch {
+  case e: Exception =>
+    throw e
+}
+```
+
+##
+
+with `Try`:
+
+```tut
+import scala.util.Try
+
+def user: Try[String] = Try(findUser(3))
+```
+
+# Either
+
+##
+
+Either represents computations that can return two different values.
+One of the many use cases for either is validations:
+
+##
+
+without either
+
+```tut
+case class ValidationError() extends Exception()
+
+def validatePhone(phone: String): String = if (phone.length == 9) {
+  phone
+} else {
+  throw ValidationError()
+}
+```
+
+##
+
+With either:
+
+```tut
+def validatePhone(phone: String): Either[ValidationError, String] =
+  if (phone.length == 9) {
+    Right(phone)
+  } else {
+    Left(ValidationError())
+  }
+```
+
+# Future
+
+##
+
+Future represents computations detached from time.  You know that
+those computations will happen, but do not when.  It's useful when you
+have an expensive operation and don't want to block the current
+thread.
+
+##
+
+without future
+
+```tut:silent
+val callDB: Runnable = new Runnable {
+  def run(): Unit = {
+    db.findUser(3)
+  }
+}
+
+new Thread(callDB).start
+```
+
+##
+
+with future
+
+```tut:silent
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+
+val callDB: Future[String] = Future(findUser(3))
+```
