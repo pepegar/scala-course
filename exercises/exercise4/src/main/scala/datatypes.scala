@@ -40,10 +40,10 @@ object option {
   /**
     *
     */
-  def userOrClient = if (hasBoughtBefore) {
-    Client()
+  def userOrClient: Either[User, Client] = if (hasBoughtBefore) {
+    Right(Client())
   } else {
-    User()
+    Left(User())
   }
 
 }
