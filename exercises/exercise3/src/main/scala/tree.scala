@@ -33,11 +33,17 @@ object Tree {
     1 + l + r
   })
 
-  def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
-    Node[String](l, a.toString, r)
-  })
 
-  def squared(tree: Tree[Int]): Tree[Int] = fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
-    Node[Int](l, a * a, r)
-  })
+  /**
+    * Implement the map function based on fold
+    */
+  def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] = ???
+
+  // def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
+  //   Node[String](l, a.toString, r)
+  // })
+
+  // def squared(tree: Tree[Int]): Tree[Int] = fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
+  //   Node[Int](l, a * a, r)
+  // })
 }
