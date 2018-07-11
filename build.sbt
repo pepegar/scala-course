@@ -6,6 +6,9 @@ lazy val exercise1 = project
 lazy val exercise2 = project
   .in(file("exercises/exercise2"))
 
+lazy val exercise3 = project
+  .in(file("exercises/exercise3"))
+
 lazy val docs = project
   .in(file("docs"))
   .settings(
