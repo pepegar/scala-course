@@ -211,7 +211,7 @@ def squared(tree: Tree[Int]): Tree[Int] = tree match {
 squared(myTree)
 ```
 
-# Exercise!
+# Exercise 3
 
 ##
 

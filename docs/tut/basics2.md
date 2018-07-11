@@ -187,7 +187,7 @@ def sum(list: List[Int]): Int = list match {
 }
 ```
 
-# Exercise 1
+# Exercise 2.1
 
 Implement a generic binary tree data structure.
 
@@ -201,7 +201,7 @@ case class Empty[A]() extends Tree[A]
 case class Node[A](l: Tree[A], a: A, r: Tree[A]) extends Tree[A]
 ```
 
-# Exercise 2
+# Exercise 2.2
 
 create a function to calculate the height of a tree.
 
@@ -216,7 +216,7 @@ def height[A](tree: Tree[A]): Int = tree match {
 }
 ```
 
-# Exercise 3
+# Exercise 2.3
 
 Create a function that sums all the leaves of an Int tree.
 
@@ -232,7 +232,7 @@ def sum(tree: Tree[Int]): Int = tree match {
 }
 ```
 
-# Exercise 4
+# Exercise 2.4
 
 Create a function that counts all the leaves in a tree
 
@@ -247,7 +247,7 @@ def count[A](tree: Tree[A]): Int = tree match {
 }
 ```
 
-# Exercise 5
+# Exercise 2.5
 
 Create a function that transforms each element in a tree into it's
 string representation
@@ -267,7 +267,7 @@ def toStringNodes(tree: Tree[Int]): Tree[String] = tree match {
 ```
 
 
-# Exercise 6
+# Exercise 2.6
 
 Create a function that squares all elements in an Int tree
 

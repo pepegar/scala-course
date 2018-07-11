@@ -267,9 +267,7 @@ either a `OkResponse` or a `FailureResponse`.
 | `var`        | mutable reference                     |
 | `def`        | function/method                       |
 
-# Exercise time!
-
-# Exercise 1
+# Exercise 1.1
 
 ##
 
@@ -303,7 +301,7 @@ case class TimeoutFailure(userId: UUID, intentId: UUID) extends PaymentFailure
 case class InsufficentFundsFailure(userId: UUID, inteintId: UUID) extends PaymentFailure
 ```
 
-# Exercise 2
+# Exercise 1.2
 
 ##
 
