@@ -1,16 +1,11 @@
 scalaVersion := "2.12.4"
 
-scalacOptions ++= Seq(
+Tut / scalacOptions ++= Seq(
   "-encoding", "UTF-8", // 2 args
   "-feature",
   "-language:existentials",
   "-language:higherKinds",
-  "-language:implicitConversions",
-  "-unchecked",
-  "-Xlint",
-  "-Yno-adapted-args",
-  "-Ywarn-dead-code",
-  "-Ywarn-value-discard"
+  "-language:implicitConversions"
 )
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5")
