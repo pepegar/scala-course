@@ -24,10 +24,18 @@ abstraction1:
           tut-out/abstraction1.md -o tut-out/abstraction1.html
 	@echo "- converting abstraction1.md to abstraction1.html"
 
+typeclasses:
+	@$(PANDOC) -t html5 \
+          --template=default.revealjs --standalone --section-divs \
+          --variable theme="beige" --variable transition="linear" \
+          tut-out/typeclasses.md -o tut-out/typeclasses.html
+	@echo "- converting typeclasses.md to typeclasses.html"
+
+
 tut:
 	$(SBT) tut
 
-all: tut basics1 basics2 abstraction1
+all: tut basics1 basics2 abstraction1 typeclasses
 
 clean:
 	rm -f tut-out/*.html

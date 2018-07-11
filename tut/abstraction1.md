@@ -95,7 +95,7 @@ Is this pure?
 
 ```tut:invisible
 object db {
-  def findUser(id: Int): Option[String] = ???
+  def findUser(id: Int): Option[String] = None
 }
 ```
 
@@ -418,7 +418,7 @@ with common tasks.
 
 Option is used when something may be not present. Use it whenever you'd use null `null`.
 
-##
+s##
 
 ```tut:invisible
 val hostDefined = false
@@ -554,103 +554,3 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 val callDB: Future[String] = Future(findUser(3))
 ```
-
-# Typeclasses
-
-##
-
-Facilitate polymorphism and abstraction.  Unlike OO polymorphism,
-typeclasses allows us to use **existing types**.  In Java, if `String`
-doesn't implement the interface you want, you can't do anything. With
-typeclasses you can do it ;)
-
-##
-
-with OO polymorphism we have 2 steps, interface and
-declaration+implementation
-
-```tut
-trait Serializable
-
-case class Car(brand: String) extends Serializable
-```
-
-##
-
-typeclasses add another step to polymorphism:
-
-```tut
-trait Serializable[A] {
-  def serialize(a: A): String
-}
-case class Car(brand: String) // we don't extend from the typeclass
-implicit val serializableCar: Serializable[Car] = new Serializable[Car] {
-  def serialize(car: Car): String = s"""{"brand": "${car.brand}"}"""
-}
-```
-
-## Abstraction
-
-Let's try to identify a pattern in those functions:
-
-```tut
-def sum(a: Int, b: Int): Int = a + b
-def concat(a: String, b: String): String = a + b
-def and(a: Boolean, b: Boolean): Boolean = a && b
-```
-
-## declaration
-
-```tut
-trait Sumable[A] {
-  def sum(a: A, b: A): A
-}
-```
-
-## implementation
-
-```tut
-implicit val intSumSumable: Sumable[Int] = new Sumable[Int]{
-  def sum(a: Int, b: Int): Int = a + b
-}
-```
-
-## implementation
-
-```tut
-implicit val stringSumable: Sumable[String] = new Sumable[String]{
-  def sum(a: String, b: String): String = a + b
-}
-```
-
-## implementation
-
-```tut
-implicit val booleanAndSumable: Sumable[Boolean] = new Sumable[Boolean]{
-  def sum(a: Boolean, b: Boolean): Boolean = a && b
-}
-```
-
-# Laws
-
-##
-
-Another important feature of typeclasses are laws.  Laws are
-properties that ensure that typeclass instances are correct.
-
-##
-
-For example, we can derive from our `Sumable` that it's associative.
-
-```
-sum(a, sum(b, c)) == sum(sum(a, b), c)
-```
-
-##
-
-Typeclasses, together with laws, provide
-
-- Recognizability: when we see the use of `Sumable` we'll know that
-  it's an associative binary operation, regardless of the type.
-- Generality: If we create a datatype, and we see it's `Sumable`,
-  we'll be able to use all functions that operate on `Sumables`.
