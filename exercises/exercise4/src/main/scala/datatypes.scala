@@ -15,11 +15,8 @@ object option {
   }
 
   /**
-    * reimplement this function using option
+    * reimplement this using Option
     */
-  val element = if (maybeString == null) {
-    null
-  } else {
-    maybeString
-  }
+  val element = Option(maybeString)
+
 }

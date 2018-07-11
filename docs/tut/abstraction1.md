@@ -565,3 +565,5 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 val callDB: Future[String] = Future(findUser(3))
 ```
+
+# Exercise 4
