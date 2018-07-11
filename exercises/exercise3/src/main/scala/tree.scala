@@ -41,11 +41,14 @@ object Tree {
     Node[B](l, fn(a), r)
   })
 
-  // def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
-  //   Node[String](l, a.toString, r)
-  // })
+  /**
+    * refactor toStringNodes & squared to be based on map instead of fold
+    */
+  def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
+    Node[String](l, a.toString, r)
+  })
 
-  // def squared(tree: Tree[Int]): Tree[Int] = fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
-  //   Node[Int](l, a * a, r)
-  // })
+  def squared(tree: Tree[Int]): Tree[Int] = fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
+    Node[Int](l, a * a, r)
+  })
 }
