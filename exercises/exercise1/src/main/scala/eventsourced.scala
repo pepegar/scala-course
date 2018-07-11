@@ -12,6 +12,14 @@ import java.util.UUID
   * - Payment goes through correctly
   * - Payment process fails with timeout
   * - Payment process fails because of Insufficent funds
+  *
+  * Exercise1.2
+  *
+  * We know that all events for this system will have several fields:
+  * - Event ID
+  * - User ID
+  *
+  * Refactor your previous exercise to add those.
   */
 sealed trait Event
 case class UserLogIn(userId: UUID) extends Event
