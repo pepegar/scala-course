@@ -37,7 +37,9 @@ object Tree {
   /**
     * Implement the map function based on fold
     */
-  def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] = ???
+  def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] = fold(tree)(Empty[B](), { (l: Tree[B], a: A, r: Tree[B]) =>
+    Node[B](l, fn(a), r)
+  })
 
   // def toStringNodes(tree: Tree[Int]): Tree[String] = fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
   //   Node[String](l, a.toString, r)
