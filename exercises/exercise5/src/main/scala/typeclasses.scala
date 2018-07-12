@@ -12,4 +12,9 @@ object typeclasses {
     def map[A, B](fa: Tree[A])(f: A => B): Tree[B] =
       exercise3.Tree.map(fa)(f)
   }
+
+  /**
+    * create a Foldable instance for our binary tree
+    */
+  implicit val treeFoldable: Foldable[Tree] = ???
 }
