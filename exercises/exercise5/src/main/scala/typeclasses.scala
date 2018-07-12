@@ -51,4 +51,13 @@ object typeclasses {
         case Just(Right(b)) => Just(b)
       }
   }
+
+  /**
+    * Parametrize the following functions to work on typeclasses, not
+    * directly on trees.
+    */
+  def sum(tree: Tree[Int]): Int = ???
+  def count[A](tree: Tree[A]): Int = ???
+  def toStringNodes(tree: Tree[Int]): Tree[String] = ???
+  def squared(tree: Tree[Int]): Tree[Int] = ???
 }
