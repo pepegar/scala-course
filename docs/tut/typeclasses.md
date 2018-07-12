@@ -217,12 +217,32 @@ trait Show[A] {
 }
 ```
 
+# Foldable
+
+##
+
+Is a typeclass whose type parameter is a type constructor that can be
+folded to produce a value.
+
+##
+
+```tut:invisible
+type Eval[A] = A
+```
+
+```tut:silent
+trait Foldable[F[_]] {
+  def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
+  def foldRight[A, B](fa: F[A],lb: Eval[B])(f: (A, Eval[B]) => Eval[B]): Eval[B]
+}
+```
+
 # Functor
 
 ##
 
-Is a typeclass whose type parameter is a type constructor that
-can be mapped over. Let's see how it's declared.
+Is a typeclass for type constructors that can be mapped over. Let's
+see how it's declared.
 
 ##
 
