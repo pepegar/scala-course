@@ -3,10 +3,24 @@
 This is a course crafted for OO developers that want to learn Scala &
 functional programming.
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Scala course](#scala-course)
+    - [exercises](#exercises)
+        - [tags](#tags)
+        - [compiling](#compiling)
+    - [building](#building)
+
+<!-- markdown-toc end -->
+
+
 ## exercises
 
 For the exercises, go to the `exercises` folder & select the exercise
 you want to do.
+
+### tags
 
 Then, checkout the tag from the description (or the solution if you
 want to see it).
@@ -33,6 +47,18 @@ want to see it).
 | exercise5.3-description | exercise5.3-solution |
 | exercise5.4-description | exercise5.4-solution |
 | exercise5.5-description | exercise5.5-solution |
+
+### compiling
+
+You can compile the exercises with one of:
+
+```sbt
+$ ./sbt exercise1/compile
+$ ./sbt exercise2/compile
+$ ./sbt exercise3/compile
+$ ./sbt exercise4/compile
+$ ./sbt exercise5/compile
+```
 
 ## building
 
