@@ -66,7 +66,7 @@ object typeclasses {
     F.map(f)(_.toString)
 
   def squared[F[_]](f: F[Int])(implicit F: Functor[F]): F[Int] =
-    F.map(f)(_.toString)
+    F.map(f)(x => x * x)
 
   /**
     * Abstract this function further
