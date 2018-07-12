@@ -2,6 +2,7 @@ package exercise5
 
 import cats._ // this import brings all typeclasses
 import exercise3._
+import scala.annotation.tailrec
 
 object typeclasses {
 
@@ -28,4 +29,23 @@ object typeclasses {
     }
   }
 
+  /**
+    * create a Monad instance for Maybe
+    */
+  sealed trait Maybe[A]
+  case class Nothing[A]() extends Maybe[A]
+  case class Just[A](a: A) extends Maybe[A]
+
+  implicit val maybeMonad: Monad[Maybe] = new Monad[Maybe] {
+    def pure[A](x: A): Maybe[A] = ???
+    def flatMap[A, B](fa: Maybe[A])(f: A => Maybe[B]): Maybe[B] = ???
+
+    @tailrec
+    def tailRecM[A, B](a: A)(f: A => Maybe[Either[A, B]]): Maybe[B] =
+      f(a) match {
+        case Nothing() => Nothing()
+        case Just(Left(a1)) => tailRecM(a1)(f)
+        case Just(Right(b)) => Just(b)
+      }
+  }
 }
