@@ -98,6 +98,17 @@ Typeclasses, together with laws, provide
 - Generality: If we create a datatype, and we see it's `Sumable`,
   we'll be able to use all functions that operate on `Sumables`.
 
+# Using typeclasses
+
+#
+
+##
+
+```tut:silent
+def needsTypeclassContextBound[A: Sumable] = ???
+def needsTypeclassImplicit[A](implicit x: Sumable[A]) = ???
+```
+
 # Typeclasses
 
 ##
@@ -141,7 +152,7 @@ trait Monoid[A] extends Semigroup[A] {
 What could be the `identity` element for the three semigroups we
 created?
 
-##
+## implementation
 
 ```tut
 implicit val intSumMonoid: Monoid[Int] = new Monoid[Int] {
@@ -284,5 +295,10 @@ trait Monad[F[_]] extends Applicative[F] {
   def flatMap[A, B](fn: A => F[B])(fa: F[A]): F[B]
 }
 ```
+
+##
+
+Since monads have a flatMap method, we can use any Monad[F] in a for
+comprehension!
 
 # Exercise 5
