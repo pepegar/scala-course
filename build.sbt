@@ -33,3 +33,14 @@ lazy val docs = project
     tutSourceDirectory := baseDirectory.value / "tut",
     tutTargetDirectory := baseDirectory.value / "tut-out")
   .enablePlugins(TutPlugin)
+
+lazy val server = project
+  .in(file("server"))
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.http4s" %% "http4s-dsl" % "0.18.21",
+      "org.http4s" %% "http4s-blaze-server" % "0.18.21",
+      "ch.qos.logback" % "logback-classic" % "1.2.3"
+    )
+  )
+
