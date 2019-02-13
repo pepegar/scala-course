@@ -36,13 +36,21 @@ typeclasses:
           docs/tut-out/typeclasses.md -o docs/tut-out/typeclasses.html
 	@echo "- converting typeclasses.md to typeclasses.html"
 
+scalacheck:
+	@$(PANDOC) -t html5 \
+          --template=default.revealjs --standalone --section-divs \
+          --variable theme="beige" --variable transition="linear" \
+          --variable revealjs-url=$(REVEAL_CDN) \
+          docs/tut-out/scalacheck.md -o docs/tut-out/scalacheck.html
+	@echo "- converting scalacheck.md to scalacheck.html"
+
 move-files:
 	@cp docs/tut-out/*.html server/src/main/resources
 
 tut:
 	$(SBT) docs/tut
 
-all: tut basics1 basics2 abstraction1 typeclasses move-files
+all: tut basics1 basics2 abstraction1 typeclasses scalacheck move-files
 
 clean:
 	rm -f docs/tut-out/*.html

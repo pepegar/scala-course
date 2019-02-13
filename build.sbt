@@ -19,6 +19,17 @@ lazy val exercise5 = project
     libraryDependencies += "org.typelevel" %% "cats-core" % "1.1.0"
   )
 
+lazy val exampleScalacheck = project
+  .in(file("examples/scalacheck"))
+  .dependsOn(exercise3)
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.typelevel" %% "cats-core" % "1.6.0",
+      "org.scalacheck" %% "scalacheck" % "1.13.4"
+    )
+  )
+
+
 lazy val docs = project
   .in(file("docs"))
   .settings(
@@ -31,7 +42,8 @@ lazy val docs = project
     ),
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5"),
     tutSourceDirectory := baseDirectory.value / "tut",
-    tutTargetDirectory := baseDirectory.value / "tut-out")
+    tutTargetDirectory := baseDirectory.value / "tut-out",
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4")
   .enablePlugins(TutPlugin)
 
 lazy val server = project
