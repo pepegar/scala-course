@@ -3,7 +3,7 @@ package exercise4
 import java.util.Random
 import scala.util.Try
 
-object option {
+object Exercise4 {
   val random = new Random
 
   val maybeString =
