@@ -1,3 +1,34 @@
+---
+title: Scala Basics 1
+author: Pepe García
+date: 2020-04-20
+---
+
+# Scala Basics
+
+## Scala?
+
+# Scala Basics
+
+## Scala?
+
+- Object Oriented/Functional Language
+
+# Scala Basics
+
+## Scala?
+
+- Object Oriented/Functional Language
+- Static typing
+
+# Scala Basics
+
+## Scala?
+
+- Object Oriented/Functional Language
+- Static typing
+- Type inference
+
 # Scala Basics
 
 ## Scala?
@@ -7,11 +38,15 @@
 - Type inference
 - Functional programming capabilities
 
+# Scala Basics
+
 ## Why object oriented?
 
-- subtyping
-- everything's an object
-- inheritance
+- Subtyping polymorphism
+- Everything's an object
+- Inheritance
+
+# Scala Basics
 
 ## Why functional?
 
@@ -24,13 +59,9 @@ _This is the cool part, and what we'll be learning about_
 
 # The type system
 
-##
-
 ```tut:fail
 val a: Int = "hola!"
 ```
-
-##
 
 A type system checks the types of our program to be sure they make
 sense.
@@ -68,60 +99,64 @@ a = 3
 
 # Type inference
 
-##
-
-Normally, the compiler will be able to guess what type our values have
+Normally, the compiler will try to guess what type our values have
 even if we don't specify it.
 
-##
-
-```tut
+```tut:silent
 val hola = "hola"
 val three = 3
 ```
-
-##
 
 This doesn't mean that if we don't specify a type the declaration
 remains untyped, just that we let the compiler guess it.
 
 # Functions
 
-##
-
 Functions being first class citizens means that they can be used as
 any other value in your program.  They have types, they can be
 returned and they can be taken as parameters.
 
-##
+## Functions are values
 
-Functions are values!
-
-```tut
+```tut:silent
 val intToString: Int => String = { a =>
   a.toString
 }
 ```
 
-##
+# Functions
 
-Functions can be taken as parameters!
+Functions being first class citizens means that they can be used as
+any other value in your program.  They have types, they can be
+returned and they can be taken as parameters.
 
-```tut
-def applyFunction(number: Int, fn: Int => Int): Int =
+## Functions can be taken as parameters
+
+```tut:silent
+def applyFunction(
+  number: Int,
+  fn: Int => Int
+): Int =
   fn(number)
-  
+
 applyFunction(3, {x => x*3})
 applyFunction(2, {x => x+2})
 ```
 
-##
 
-Functions can be returned!
+# Functions
+
+Functions being first class citizens means that they can be used as
+any other value in your program.  They have types, they can be
+returned and they can be taken as parameters.
+
+## Functions can be returned!
 
 
-```tut
-def genMultiplication(times: Int): Int => Int = { x =>
+```tut:silent
+def genMultiplication(
+  times: Int
+): Int => Int = { x =>
   x * times
 }
 
@@ -131,23 +166,32 @@ times3(3)
 
 # Generics
 
-##
+Generics are a vital part of abstraction in functional programming. It
+allows us to parametrize functions, classes, traits to make them work
+for arbitrary types. Let's see an example:
+
+# Generics
 
 Generics are a vital part of abstraction in functional programming. It
 allows us to parametrize functions, classes, traits to make them work
 for arbitrary types. Let's see an example:
 
-##
-
-```tut
-def compose(f: String => Int, g: Int => Boolean): String => Boolean = { str =>
+```tut:silent
+def compose(
+  f: String => Int,
+  g: Int => Boolean
+): String => Boolean = { str =>
   g(f(str))
 }
 ```
 
-##
+# Generics
 
-```tut
+Generics are a vital part of abstraction in functional programming. It
+allows us to parametrize functions, classes, traits to make them work
+for arbitrary types. Let's see an example:
+
+```tut:silent
 val length: String => Int = _.length
 val isEven: Int => Boolean = { i => i % 2 == 0 }
 
@@ -159,28 +203,27 @@ lengthIsEven("100")
 lengthIsEven("1000")
 ```
 
-##
+# Generics
 
 But, in the previous example, do we really care about the specific
 types of the functions `f` & `g`? or we just need them to match?
 
-##
-
 We could use a **generic** implementation for `compose`!
 
-```tut
-def composeGeneric[A, B, C](f: A => B, g: B => C): A => C = { a =>
+```tut:silent
+def composeGeneric[A, B, C](
+  f: A => B,
+  g: B => C
+): A => C = { a =>
   g(f(a))
 }
-``` 
+```
 
-##
+# Generics
 
 And then we could use `composeGeneric` the same way we used `compose`.
 
-##
-
-```tut
+```tut:silent
 val length: String => Int = _.length
 val isEven: Int => Boolean = { i => i % 2 == 0 }
 
@@ -194,40 +237,38 @@ lengthIsEven("1000")
 
 # Algebraic data types
 
-##
-
-Algebraic data types are composite types, made up from smaller ones.
+Algebraic data types are composite types made up from smaller ones.
 There are two basic constructs for them:
 
 # Case classes
 
-##
-
 case classes (also called **product types**) encode a grouping of other
 fields that should **all** be present in all values.
 
-##
-
 ```tut:silent
-case class Package(length: Int, width: Int, height: Int, weight: Int)
+case class Package(
+  length: Int,
+  width: Int,
+  height: Int,
+  weight: Int)
 ```
 
 In this example we know that all packages should have a length, a
 width, a height, and a weight.
 
-##
+# Case classes
 
 Case classes have other cool feature, copying.  Copying allows us to
 create copies of the object with some fields changed.  This helps
 making programs inmutable!
 
-##
-
 ```tut:silent
-// This is a package of 10x15x20cm and 3 kilograms
+// Notice that, for instantiating case classes,
+// we don't use `new`.
 val pack = Package(10, 15, 20, 3)
 ```
-##
+
+# Case classes
 
 If we want to change one of the fields of a case class, we just need
 to call copy and reassign a new value for the field:
@@ -238,16 +279,14 @@ val pack2 = pack.copy(weight = 2)
 
 # Sealed traits
 
-##
-
 Sealed traits (also called **sum types**) encode a type that can be **one
 of** all the different invariants:
 
-##
-
 ```tut:silent
 sealed trait ResponseFromServer
-case class OkResponse(json: String) extends ResponseFromServer
+case class OkResponse(
+  json: String
+) extends ResponseFromServer
 case object FailureResponse extends ResponseFromServer
 ```
 
@@ -269,12 +308,8 @@ either a `OkResponse` or a `FailureResponse`.
 
 # Exercise 1.1
 
-##
-
 Let's imagine a simple event sourced application.  We want to define
 some events that we can handle:
-
-##
 
 - An user logs in
 - A customer adds an item to the basket
@@ -285,9 +320,9 @@ some events that we can handle:
 
 # solution
 
-##
+One possible solution... not **the** one.
 
-```tut
+```tut:silent
 import java.util.UUID
 
 sealed trait Event
@@ -314,7 +349,7 @@ Refactor your previous exercise to add those.
 
 # solution
 
-```tut
+```tut:silent
 sealed trait Event {
   def id: UUID
   def userId: UUID
