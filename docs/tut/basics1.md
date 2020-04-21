@@ -51,9 +51,40 @@ date: 2020-04-20
 ## Why functional?
 
 - Functions are _first class citizens_
+
+# Scala Basics
+
+## Why functional?
+
+- Functions are _first class citizens_
+- Pattern matching
+
+# Scala Basics
+
+## Why functional?
+
+- Functions are _first class citizens_
+- Pattern matching
+- Algebraic Data Types
+
+# Scala Basics
+
+## Why functional?
+
+- Functions are _first class citizens_
 - Pattern matching
 - Algebraic Data Types
 - Higher kinded types
+
+# Scala Basics
+
+## Why functional?
+
+- Functions are _first class citizens_
+- Pattern matching
+- Algebraic Data Types
+- Higher kinded types
+- inmutability
 
 _This is the cool part, and what we'll be learning about_
 
