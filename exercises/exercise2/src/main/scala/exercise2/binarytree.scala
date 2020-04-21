@@ -40,4 +40,9 @@ object Tree {
     case Node(l, _, r) => 1 + count(l) + count(r)
   }
 
+  /**
+    * Create a function that transforms each element in a tree into it's
+    * string representation
+    */
+  def toStringNodes(tree: Tree[Int]): Tree[String] = ???
 }
