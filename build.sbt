@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.12.4"
+ThisBuild / scalaVersion := "2.12.11"
 
 lazy val exercise1 = project
   .in(file("exercises/exercise1"))
@@ -55,4 +55,3 @@ lazy val server = project
       "ch.qos.logback" % "logback-classic" % "1.2.3"
     )
   )
-
