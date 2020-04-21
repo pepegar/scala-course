@@ -7,6 +7,11 @@ functional programming.
 **Table of Contents**
 
 - [Scala course](#scala-course)
+    - [Sections](#sections)
+        - [Basics 1](#basics-1)
+        - [Basics 2](#basics-2)
+        - [Abstraction](#abstraction)
+        - [Typeclasses](#typeclasses)
     - [exercises](#exercises)
         - [tags](#tags)
         - [compiling](#compiling)
@@ -14,6 +19,32 @@ functional programming.
 
 <!-- markdown-toc end -->
 
+
+## Sections
+
+This course has the following sections, delivered during two days
+normally.
+
+### Basics 1
+
+Learn the basics of the language, the most interesting features and
+how to deal with data usign ADTs.
+
+### Basics 2
+
+Learn how to apply pattern matching and recursion to solve problems on
+algebraic data types.
+
+### Abstraction
+
+In this section we'll start to dig deeper in the functional
+programming aspects of Scala, and to learn new functional
+abstractions.
+
+### Typeclasses
+
+In this section we'll learn how to implement _Ad hoc polymorphism_ in
+Scala using typeclasses, and all the benefits it provides.
 
 ## exercises
 
