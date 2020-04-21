@@ -6,5 +6,6 @@ pkgs.mkShell {
     pkgs.jdk8
     pkgs.sbt
     pkgs.pandoc
+    pkgs.make
   ];
 }

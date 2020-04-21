@@ -1,57 +1,65 @@
-.PHONY: tut clean
+.PHONY: tut
 
 PANDOC = pandoc
 SBT = sbt
-REVEAL_CDN = "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
 
 basics1:
-	@$(PANDOC) -t html5 \
-          --template=default.revealjs --standalone --section-divs \
-          --variable theme="beige" --variable transition="linear" \
-          --variable revealjs-url=$(REVEAL_CDN) \
-          docs/tut-out/basics1.md -o docs/tut-out/basics1.html
-	@echo "- converting basics1.md to basics1.html"
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/basics1.md -o slides/basics1.pdf
+	@echo "- generating basics1.pdf"
 
 basics2:
-	@$(PANDOC) -t html5 \
-          --template=default.revealjs --standalone --section-divs \
-          --variable theme="beige" --variable transition="linear" \
-          --variable revealjs-url=$(REVEAL_CDN) \
-          docs/tut-out/basics2.md -o docs/tut-out/basics2.html
-	@echo "- converting basics2.md to basics2.html"
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/basics2.md -o slides/basics2.pdf
+	@echo "- generating basics2.pdf"
 
 abstraction1:
-	@$(PANDOC) -t html5 \
-          --template=default.revealjs --standalone --section-divs \
-          --variable theme="beige" --variable transition="linear" \
-          --variable revealjs-url=$(REVEAL_CDN) \
-          docs/tut-out/abstraction1.md -o docs/tut-out/abstraction1.html
-	@echo "- converting abstraction1.md to abstraction1.html"
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/abstraction1.md -o slides/abstraction1.pdf
+	@echo "- generating abstraction1.pdf"
 
 typeclasses:
-	@$(PANDOC) -t html5 \
-          --template=default.revealjs --standalone --section-divs \
-          --variable theme="beige" --variable transition="linear" \
-          --variable revealjs-url=$(REVEAL_CDN) \
-          docs/tut-out/typeclasses.md -o docs/tut-out/typeclasses.html
-	@echo "- converting typeclasses.md to typeclasses.html"
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/typeclasses.md -o slides/typeclasses.pdf
+	@echo "- generating typeclasses.pdf"
 
 scalacheck:
-	@$(PANDOC) -t html5 \
-          --template=default.revealjs --standalone --section-divs \
-          --variable theme="beige" --variable transition="linear" \
-          --variable revealjs-url=$(REVEAL_CDN) \
-          docs/tut-out/scalacheck.md -o docs/tut-out/scalacheck.html
-	@echo "- converting scalacheck.md to scalacheck.html"
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/scalacheck.md -o slides/scalacheck.pdf
+	@echo "- generating scalacheck.pdf"
 
-move-files:
-	@cp docs/tut-out/*.html server/src/main/resources
+implicits:
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/implicits.md -o slides/implicits.pdf
+	@echo "- generating implicits.pdf"
+
+dsls:
+	@$(PANDOC) -t beamer \
+             --highlight-style=zenburn \
+             --pdf-engine=xelatex \
+             --from markdown \
+             docs/tut-out/dsls.md -o slides/dsls.pdf
+	@echo "- generating dsls.pdf"
 
 tut:
 	$(SBT) docs/tut
 
-all: tut basics1 basics2 abstraction1 typeclasses scalacheck move-files
-
-clean:
-	rm -f docs/tut-out/*.html
-	rm -f server/src/main/resources/*.html
+all: tut basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
