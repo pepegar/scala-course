@@ -1,3 +1,12 @@
+---
+title: Scalacheck
+author: Pepe García
+date: 2020-04-20
+subject: Scala
+keywords: [FP, Scala]
+lang: "en"
+---
+
 # Scalacheck
 
 # Scalacheck
