@@ -28,10 +28,6 @@ object Exercise4 {
   /**
     * reimplement this using try
     */
-  def useTry = try {
-      stringOrThrow
-    } catch {
-      case e: Throwable => throw e
-    }
+  def useTry = Try(stringOrThrow)
 
 }
