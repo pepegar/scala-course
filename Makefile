@@ -1,4 +1,4 @@
-.PHONY: tut
+.PHONY: mdoc
 
 PANDOC = pandoc
 SBT = sbt
@@ -9,7 +9,7 @@ basics1:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/basics1.md -o slides/basics1.pdf
+             docs/mdoc-out/basics1.md -o slides/basics1.pdf
 	@echo "- generating basics1.pdf"
 
 basics2:
@@ -17,7 +17,7 @@ basics2:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/basics2.md -o slides/basics2.pdf
+             docs/mdoc-out/basics2.md -o slides/basics2.pdf
 	@echo "- generating basics2.pdf"
 
 abstraction1:
@@ -25,7 +25,7 @@ abstraction1:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/abstraction1.md -o slides/abstraction1.pdf
+             docs/mdoc-out/abstraction1.md -o slides/abstraction1.pdf
 	@echo "- generating abstraction1.pdf"
 
 typeclasses:
@@ -33,7 +33,7 @@ typeclasses:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/typeclasses.md -o slides/typeclasses.pdf
+             docs/mdoc-out/typeclasses.md -o slides/typeclasses.pdf
 	@echo "- generating typeclasses.pdf"
 
 scalacheck:
@@ -41,7 +41,7 @@ scalacheck:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/scalacheck.md -o slides/scalacheck.pdf
+             docs/mdoc-out/scalacheck.md -o slides/scalacheck.pdf
 	@echo "- generating scalacheck.pdf"
 
 implicits:
@@ -49,7 +49,7 @@ implicits:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/implicits.md -o slides/implicits.pdf
+             docs/mdoc-out/implicits.md -o slides/implicits.pdf
 	@echo "- generating implicits.pdf"
 
 dsls:
@@ -57,12 +57,12 @@ dsls:
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/tut-out/dsls.md -o slides/dsls.pdf
+             docs/mdoc-out/dsls.md -o slides/dsls.pdf
 	@echo "- generating dsls.pdf"
 
-tut:
+mdoc:
 	$(SBT) docs/mdoc
 
-all: tut basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
+all: mdoc basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
 
 pandoc_all: basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls

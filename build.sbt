@@ -41,7 +41,7 @@ lazy val docs = project
       "-language:implicitConversions"
     ),
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5"),
-    mdocIn := baseDirectory.value / "tut",
-    mdocOut := baseDirectory.value / "tut-out",
+    mdocIn := baseDirectory.value / "mdoc",
+    mdocOut := baseDirectory.value / "mdoc-out",
     libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.0")
   .enablePlugins(MdocPlugin)

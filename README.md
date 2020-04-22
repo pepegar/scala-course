@@ -102,5 +102,5 @@ Once you have it:
 $ make all
 ```
 
-This will generate HTMLs for the presentation in the `docs/tut-out`
-presentation.
+This will generate PDFs with the presentations in the `/slides`
+folder.
