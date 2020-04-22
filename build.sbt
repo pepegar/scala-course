@@ -45,13 +45,3 @@ lazy val docs = project
     tutTargetDirectory := baseDirectory.value / "tut-out",
     libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4")
   .enablePlugins(TutPlugin)
-
-lazy val server = project
-  .in(file("server"))
-  .settings(
-    libraryDependencies ++= Seq(
-      "org.http4s" %% "http4s-dsl" % "0.18.21",
-      "org.http4s" %% "http4s-blaze-server" % "0.18.21",
-      "ch.qos.logback" % "logback-classic" % "1.2.3"
-    )
-  )
