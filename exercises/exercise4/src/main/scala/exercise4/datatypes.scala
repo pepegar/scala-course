@@ -25,11 +25,6 @@ object Exercise4 {
   /**
     * reimplement this using Option
     */
-  def useOption =
-    if (maybeString == null) {
-      null
-    } else {
-      maybeString
-    }
+  def useOption = Option(maybeString)
 
 }
