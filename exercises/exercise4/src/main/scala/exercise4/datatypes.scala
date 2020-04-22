@@ -20,11 +20,18 @@ object Exercise4 {
       throw new Exception("oh oh")
     }
 
-  val hasBoughtBefore = random.nextBoolean
-
   /**
     * reimplement this using Option
     */
   def useOption = Option(maybeString)
+
+  /**
+    * reimplement this using try
+    */
+  def useTry = try {
+      stringOrThrow
+    } catch {
+      case e: Throwable => throw e
+    }
 
 }
