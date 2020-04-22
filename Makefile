@@ -52,13 +52,13 @@ implicits:
              docs/mdoc-out/implicits.md -o slides/implicits.pdf
 	@echo "- generating implicits.pdf"
 
-dsls:
+taglessfinal:
 	@$(PANDOC) -t beamer \
              --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
-             docs/mdoc-out/dsls.md -o slides/dsls.pdf
-	@echo "- generating dsls.pdf"
+             docs/mdoc-out/taglessfinal.md -o slides/taglessfinal.pdf
+	@echo "- generating taglessfinal.pdf"
 
 mdoc:
 	$(SBT) docs/mdoc

@@ -16,7 +16,7 @@ lazy val exercise5 = project
   .in(file("exercises/exercise5"))
   .dependsOn(exercise3)
   .settings(
-    libraryDependencies += "org.typelevel" %% "cats-core" % "1.1.0"
+    libraryDependencies += "org.typelevel" %% "cats-core" % "2.1.0"
   )
 
 lazy val exampleScalacheck = project
@@ -43,5 +43,9 @@ lazy val docs = project
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5"),
     mdocIn := baseDirectory.value / "mdoc",
     mdocOut := baseDirectory.value / "mdoc-out",
-    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.0")
+    libraryDependencies ++= Seq(
+      "org.scalacheck" %% "scalacheck" % "1.14.0",
+      "org.typelevel" %% "cats-core" % "2.1.0"
+    )
+  )
   .enablePlugins(MdocPlugin)
