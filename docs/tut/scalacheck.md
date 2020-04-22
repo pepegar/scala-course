@@ -6,7 +6,7 @@ domain logic.
 
 we use it with the import:
 
-```tut
+```scala mdoc
 import org.scalacheck._
 ```
 
@@ -42,7 +42,7 @@ combinators.
 
 ##
 
-```tut
+```scala mdoc
 case class Car(age: Int, brand: String)
 
 val carGen: Gen[Car] = for {

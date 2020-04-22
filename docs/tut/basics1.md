@@ -90,7 +90,7 @@ _This is the cool part, and what we'll be learning about_
 
 # The type system
 
-```tut:fail
+```scala mdoc:fail
 val a: Int = "hola!"
 ```
 
@@ -120,11 +120,11 @@ a = 3
 
 ## Scala
 
-```tut:silent
+```scala mdoc:silent
 var a = "patata"
 ```
 
-```tut:fail
+```scala mdoc:fail
 a = 3
 ```
 
@@ -133,7 +133,7 @@ a = 3
 Normally, the compiler will try to guess what type our values have
 even if we don't specify it.
 
-```tut:silent
+```scala mdoc:silent
 val hola = "hola"
 val three = 3
 ```
@@ -149,7 +149,7 @@ returned and they can be taken as parameters.
 
 ## Functions are values
 
-```tut:silent
+```scala mdoc:silent
 val intToString: Int => String = { a =>
   a.toString
 }
@@ -163,7 +163,7 @@ returned and they can be taken as parameters.
 
 ## Functions can be taken as parameters
 
-```tut:silent
+```scala mdoc:silent
 def applyFunction(
   number: Int,
   fn: Int => Int
@@ -184,7 +184,7 @@ returned and they can be taken as parameters.
 ## Functions can be returned!
 
 
-```tut:silent
+```scala mdoc:silent
 def genMultiplication(
   times: Int
 ): Int => Int = { x =>
@@ -207,7 +207,7 @@ Generics are a vital part of abstraction in functional programming. It
 allows us to parametrize functions, classes, traits to make them work
 for arbitrary types. Let's see an example:
 
-```tut:silent
+```scala mdoc:silent
 def compose(
   f: String => Int,
   g: Int => Boolean
@@ -222,7 +222,7 @@ Generics are a vital part of abstraction in functional programming. It
 allows us to parametrize functions, classes, traits to make them work
 for arbitrary types. Let's see an example:
 
-```tut:silent
+```scala mdoc:silent
 val length: String => Int = _.length
 val isEven: Int => Boolean = { i => i % 2 == 0 }
 
@@ -241,7 +241,7 @@ types of the functions `f` & `g`? or we just need them to match?
 
 We could use a **generic** implementation for `compose`!
 
-```tut:silent
+```scala mdoc:silent
 def composeGeneric[A, B, C](
   f: A => B,
   g: B => C
@@ -254,7 +254,7 @@ def composeGeneric[A, B, C](
 
 And then we could use `composeGeneric` the same way we used `compose`.
 
-```tut:silent
+```scala mdoc:nest:silent
 val length: String => Int = _.length
 val isEven: Int => Boolean = { i => i % 2 == 0 }
 
@@ -276,7 +276,7 @@ There are two basic constructs for them:
 case classes (also called **product types**) encode a grouping of other
 fields that should **all** be present in all values.
 
-```tut:silent
+```scala mdoc:silent
 case class Package(
   length: Int,
   width: Int,
@@ -293,7 +293,7 @@ Case classes have other cool feature, copying.  Copying allows us to
 create copies of the object with some fields changed.  This helps
 making programs inmutable!
 
-```tut:silent
+```scala mdoc:silent
 // Notice that, for instantiating case classes,
 // we don't use `new`.
 val pack = Package(10, 15, 20, 3)
@@ -304,7 +304,7 @@ val pack = Package(10, 15, 20, 3)
 If we want to change one of the fields of a case class, we just need
 to call copy and reassign a new value for the field:
 
-```tut:silent
+```scala mdoc:silent
 val pack2 = pack.copy(weight = 2)
 ```
 
@@ -313,7 +313,7 @@ val pack2 = pack.copy(weight = 2)
 Sealed traits (also called **sum types**) encode a type that can be **one
 of** all the different invariants:
 
-```tut:silent
+```scala mdoc:silent
 sealed trait ResponseFromServer
 case class OkResponse(
   json: String
@@ -353,7 +353,7 @@ some events that we can handle:
 
 One possible solution... not **the** one.
 
-```tut:silent
+```scala mdoc:silent
 import java.util.UUID
 
 sealed trait Event
@@ -380,7 +380,7 @@ Refactor your previous exercise to add those.
 
 # solution
 
-```tut:silent
+```scala mdoc:nest:silent
 sealed trait Event {
   def id: UUID
   def userId: UUID

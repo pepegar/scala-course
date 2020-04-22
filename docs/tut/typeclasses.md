@@ -1,42 +1,40 @@
 # Typeclasses
 
-##
-
 Facilitate polymorphism and abstraction.  Unlike OO polymorphism,
 typeclasses allows us to expand the functionality of **existing types**.
 In Java, if `String` doesn't implement the interface you want, you
 can't do anything. With typeclasses you can do it ;)
 
-##
+# Typeclasses
 
 with OO polymorphism we have 2 steps, interface and
 declaration+implementation
 
-```tut
+```scala mdoc
 trait Serializable
 
 case class Car(brand: String) extends Serializable
 ```
 
-##
+# Typeclasses
 
 typeclasses add another step to polymorphism:
 
-```tut
-trait Serializable[A] {
-  def serialize(a: A): String
+```scala mdoc
+trait Encoder[A] {
+  def encode(a: A): String
 }
-case class Car(brand: String) // we don't extend from the typeclass
-implicit val serializableCar: Serializable[Car] = new Serializable[Car] {
-  def serialize(car: Car): String = s"""{"brand": "${car.brand}"}"""
+case class Car2(brand: String) // we don't extend from the typeclass
+implicit val serializableCar2: Encoder[Car2] = new Encoder[Car2] {
+  def encode(car: Car2): String = s"""{"brand": "${car.brand}"}"""
 }
 ```
 
-## Abstraction
+# More Abstraction
 
 Let's try to identify a pattern in those functions:
 
-```tut
+```scala mdoc
 def sum(a: Int, b: Int): Int = a + b
 def concat(a: String, b: String): String = a + b
 def and(a: Boolean, b: Boolean): Boolean = a && b
@@ -44,7 +42,7 @@ def and(a: Boolean, b: Boolean): Boolean = a && b
 
 ## declaration
 
-```tut
+```scala mdoc
 trait Sumable[A] {
   def sum(a: A, b: A): A
 }
@@ -52,7 +50,7 @@ trait Sumable[A] {
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val intSumSumable: Sumable[Int] = new Sumable[Int]{
   def sum(a: Int, b: Int): Int = a + b
 }
@@ -60,7 +58,7 @@ implicit val intSumSumable: Sumable[Int] = new Sumable[Int]{
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val stringSumable: Sumable[String] = new Sumable[String]{
   def sum(a: String, b: String): String = a + b
 }
@@ -68,7 +66,7 @@ implicit val stringSumable: Sumable[String] = new Sumable[String]{
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val booleanAndSumable: Sumable[Boolean] = new Sumable[Boolean]{
   def sum(a: Boolean, b: Boolean): Boolean = a && b
 }
@@ -104,7 +102,7 @@ Typeclasses, together with laws, provide
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 def needsTypeclassContextBound[A: Sumable] = ???
 def needsTypeclassImplicit[A](implicit x: Sumable[A]) = ???
 ```
@@ -125,7 +123,7 @@ It's normally called `Semigroup` in Functional programming.
 
 ##
 
-```tut
+```scala mdoc
 trait Semigroup[A] {
   def combine(a: A, b: A): A
 }
@@ -140,7 +138,7 @@ identity element? one that used in combine has no effect.
 
 ##
 
-```tut
+```scala mdoc
 trait Monoid[A] extends Semigroup[A] {
   def identity: A
   def combine(a: A, b: A): A
@@ -154,7 +152,7 @@ created?
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val intSumMonoid: Monoid[Int] = new Monoid[Int] {
   def identity: Int = 0
   def combine(a: Int, b: Int): Int = a + b
@@ -163,7 +161,7 @@ implicit val intSumMonoid: Monoid[Int] = new Monoid[Int] {
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val stringMonoid: Monoid[String] = new Monoid[String] {
   def identity: String = ""
   def combine(a: String, b: String): String = a + b
@@ -172,7 +170,7 @@ implicit val stringMonoid: Monoid[String] = new Monoid[String] {
 
 ## implementation
 
-```tut
+```scala mdoc
 implicit val booleanAndMonoid: Monoid[Boolean] = new Monoid[Boolean] {
   def identity: Boolean = true
   def combine(a: Boolean, b: Boolean): Boolean = a && b
@@ -200,7 +198,7 @@ FP proposes a new way of comparing objects, the `Eq` typeclass:
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 trait Eq[A] {
   def eqv(a: A, b: A): Boolean
 }
@@ -222,7 +220,7 @@ might not want to be able to print passwords, for example.
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 trait Show[A] {
   def show(a: A): String
 }
@@ -237,11 +235,11 @@ folded to produce a value.
 
 ##
 
-```tut:invisible
+```scala mdoc:invisible
 type Eval[A] = A
 ```
 
-```tut:silent
+```scala mdoc:silent
 trait Foldable[F[_]] {
   def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
   def foldRight[A, B](fa: F[A],lb: Eval[B])(f: (A, Eval[B]) => Eval[B]): Eval[B]
@@ -257,7 +255,7 @@ see how it's declared.
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 trait Functor[F[_]] {
   def map[A, B](fn: A => B)(fa: F[A]): F[B]
 }
@@ -274,7 +272,7 @@ Applicatives are Functors that have two features:
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 trait Applicative[F[_]] extends Functor[F] {
   def pure[A](a: A): F[A]
   def ap[A, B](fn: F[A => B])(fa: F[A]): F[B]
@@ -290,7 +288,7 @@ method.
 
 ##
 
-```tut:silent
+```scala mdoc:silent
 trait Monad[F[_]] extends Applicative[F] {
   def flatMap[A, B](fn: A => F[B])(fa: F[A]): F[B]
 }

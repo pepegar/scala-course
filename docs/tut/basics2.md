@@ -20,7 +20,7 @@ like a more powerful `switch` statement.
 
 # Pattern matching
 
-```tut:silent
+```scala mdoc:silent
 val a: Int = 3
 
 a match {
@@ -35,7 +35,7 @@ Scala's pattern matching has an exhaustivity checker.  This means
 that the compiler will warn if we forget to match against one of the
 cases.
 
-```tut:silent
+```scala mdoc:silent
 sealed trait Color
 case object Blue extends Color
 case object Red extends Color
@@ -45,7 +45,7 @@ case class Other(name: String) extends Color
 
 # Exhaustivity
 
-```tut
+```scala mdoc
 val color: Color = Blue
 
 color match {
@@ -58,7 +58,7 @@ color match {
 
 Destructuring allows us to query inner parts of an ADT
 
-```tut:silent
+```scala mdoc:silent
 sealed trait Vehicle
 case class Car(
   brand: String, model: String, color: Color
@@ -70,13 +70,13 @@ case class Plane(
 
 # Destructuring
 
-```tut:silent
+```scala mdoc:silent
 val vehicle: Vehicle = Car("Honda", "Accord", Red)
 ```
 
 # Destructuring
 
-```tut:silent
+```scala mdoc:silent
 vehicle match {
   case Car(brand, model, Red) =>
     s"it's a red $brand $model"
@@ -93,7 +93,7 @@ vehicle match {
 
 Guards are boolean conditions we want to check while pattern matching.
 
-```tut:silent
+```scala mdoc:silent
 val plane: Vehicle = Plane("Boeing", "747", 47)
 
 plane match {
@@ -139,7 +139,7 @@ def fib(num):
 
 ## Fibonacci in Scala
 
-```tut:silent
+```scala mdoc:silent
 def fib(num: Int): Int = num match {
   case 0 => 1
   case 1 => 1
@@ -156,38 +156,38 @@ types.
 
 Let's declare a linked list in scala.
 
-```tut:silent
-sealed trait List[A]
-case class Empty[A]() extends List[A]
-case class NonEmpty[A](
+```scala mdoc:silent
+sealed trait MyList[A]
+case class Nil[A]() extends MyList[A]
+case class Cons[A](
   head: A,
-  tail: List[A]
-) extends List[A]
+  tail: MyList[A]
+) extends MyList[A]
 ```
 
 # Recursion
 
 This is how we could create instances of this list.
 
-```tut:silent
-val three = NonEmpty(
+```scala mdoc:silent
+val three = Cons(
   1,
-  NonEmpty(
+  Cons(
     2,
-    NonEmpty(
+    Cons(
       3,
-      Empty())))
+      Nil())))
 ```
 
 # Recursion
 
 ## length
 
-```tut:silent
-def length[A](l: List[A]): Int =
+```scala mdoc:silent
+def length[A](l: MyList[A]): Int =
   l match {
-    case Empty() => 0
-    case NonEmpty(x, xs) => 1 + length(xs)
+    case Nil() => 0
+    case Cons(x, xs) => 1 + length(xs)
   }
 
 length(three)
@@ -197,11 +197,11 @@ length(three)
 
 ## sum
 
-```tut:silent
-def sum(list: List[Int]): Int =
+```scala mdoc:silent
+def sum(list: MyList[Int]): Int =
   list match {
-    case Empty() => 0
-    case NonEmpty(x, xs) => x + sum(xs)
+    case Nil() => 0
+    case Cons(x, xs) => x + sum(xs)
   }
 ```
 
@@ -215,7 +215,7 @@ Implement a generic binary tree data structure.
 
 ## Solution
 
-```tut:silent
+```scala mdoc:silent
 sealed trait Tree[A]
 case class Empty[A]() extends Tree[A]
 case class Node[A](
@@ -235,7 +235,7 @@ create a function to calculate the height of a tree.
 
 ## Solution
 
-```tut:silent
+```scala mdoc:silent
 def height[A](tree: Tree[A]): Int = tree match {
   case Empty() => 0
   case Node(l, _, r) => 1 + (height(l).max(height(r)))
@@ -253,7 +253,7 @@ Create a function that sums all the leaves of an Int tree.
 ## Solution
 
 
-```tut:silent
+```scala mdoc:silent
 def sum(tree: Tree[Int]): Int = tree match {
   case Empty() => 0
   case Node(l, x, r) => x + sum(l) + sum(r)
@@ -270,7 +270,7 @@ Create a function that counts all the leaves in a tree
 
 ## Solution
 
-```tut:silent
+```scala mdoc:silent
 def count[A](tree: Tree[A]): Int = tree match {
   case Empty() => 0
   case Node(l, _, r) => 1 + count(l) + count(r)
@@ -289,7 +289,7 @@ string representation
 
 ## Solution
 
-```tut:silent
+```scala mdoc:silent
 def toStringNodes(tree: Tree[Int]): Tree[String] = tree match {
   case Empty() => Empty()
   case Node(l, x, r) => Node(
@@ -310,7 +310,7 @@ Create a function that squares all elements in an Int tree
 
 ## Solution
 
-```tut:silent
+```scala mdoc:silent
 def squared(tree: Tree[Int]): Tree[Int] = tree match {
   case Empty() => Empty()
   case Node(l, x, r) => Node(
@@ -336,14 +336,14 @@ We express Covariance adding a `+` sign before the generic parameter name.
 
 ## Covariance
 
-Let `List` be a type constructor declared as:
+Let `CList` be a type constructor declared as:
 
-```tut:silent
-trait List[+A]
+```scala mdoc:silent
+trait CList[+A]
 ```
 
 If we have two types `Foo` and `Bar`,and `Foo` is a subtype of `Bar`,
-since `List` is covariant, `List[Foo]` is a subtype of `List[Bar]`.
+since `CList` is covariant, `CList[Foo]` is a subtype of `CList[Bar]`.
 
 # Postscript: variance
 
@@ -352,28 +352,28 @@ since `List` is covariant, `List[Foo]` is a subtype of `List[Bar]`.
 Contravariance is similar to covariance, but the inverse.  If we
 declare a type constructor as contravariant:
 
-```tut:silent
+```scala mdoc:silent
 trait Logger[-A]
 ```
 
 We mean that, for two types `Foo` and `Bar` if `Foo` is a subtype of
-`Bar`, then `List[Bar]` is a subtype of `List[Foo]`
+`Bar`, then `CList[Bar]` is a subtype of `CList[Foo]`
 
 # Postscript: variance
 
 ## Contravariance
 
-```tut:silent
-class Vehicle
-class Car extends Vehicle
+```scala mdoc:silent
+class Fruit
+class Banana extends Fruit
 
-def carLogger: Logger[Car] = null
-def vehicleLogger: Logger[Vehicle] = null
+def bananaLogger: Logger[Banana] = new Logger[Banana] {}
+def fruitLogger: Logger[Fruit] = new Logger[Fruit] {}
 
-def logCar(logger: Logger[Car]) = null
+def logBanana(logger: Logger[Banana]): Int = 3
 
-logCar(carLogger)
-logCar(vehicleLogger)
+logBanana(bananaLogger)
+logBanana(fruitLogger)
 ```
 
 # Postscript: variance

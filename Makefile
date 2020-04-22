@@ -60,6 +60,6 @@ dsls:
 	@echo "- generating dsls.pdf"
 
 tut:
-	$(SBT) docs/tut
+	$(SBT) docs/mdoc
 
 all: tut basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls

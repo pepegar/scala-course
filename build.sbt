@@ -33,7 +33,7 @@ lazy val exampleScalacheck = project
 lazy val docs = project
   .in(file("docs"))
   .settings(
-    Tut / scalacOptions ++= Seq(
+    Compile / scalacOptions ++= Seq(
       "-encoding", "UTF-8", // 2 args
       "-feature",
       "-language:existentials",
@@ -41,7 +41,7 @@ lazy val docs = project
       "-language:implicitConversions"
     ),
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5"),
-    tutSourceDirectory := baseDirectory.value / "tut",
-    tutTargetDirectory := baseDirectory.value / "tut-out",
+    mdocIn := baseDirectory.value / "tut",
+    mdocOut := baseDirectory.value / "tut-out",
     libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4")
-  .enablePlugins(TutPlugin)
+  .enablePlugins(MdocPlugin)

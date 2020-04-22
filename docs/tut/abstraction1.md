@@ -53,7 +53,7 @@ When a function is not total, we say it's partial.
 
 # Examples
 
-```tut:silent
+```scala mdoc:silent
 def sum(a: Int, b: Int): Int = a + b
 ```
 
@@ -61,7 +61,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def sum(a: Int, b: Int): Int = a + b
 ```
 
@@ -71,7 +71,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def sum(a: Int, b: Int): Int = {
   println(s"summing $a + $b")
   a + b
@@ -82,7 +82,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def sum(a: Int, b: Int): Int = {
   println(s"summing $a + $b")
   a + b
@@ -95,11 +95,11 @@ Is this pure?
 
 # Examples
 
-```tut:invisible
+```scala mdoc:invisible
 def launchMissiles(): Unit = ???
 ```
 
-```tut:silent
+```scala mdoc:silent
 def operation(): Unit = {
   launchMissiles()
   ()
@@ -110,7 +110,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def operation(): Unit = {
   launchMissiles()
   ()
@@ -123,7 +123,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:silent
 def findPhone(name: String): Option[String] = None
 ```
 
@@ -131,7 +131,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def findPhone(name: String): Option[String] = None
 ```
 
@@ -141,13 +141,13 @@ Is this pure?
 
 # Examples
 
-```tut:invisible
+```scala mdoc:invisible
 object db {
   def findUser(id: Int): Option[String] = None
 }
 ```
 
-```tut:silent
+```scala mdoc:silent
 def findUser(id: Int): String = {
   db.findUser(id) match {
     case Some(x) => x
@@ -160,7 +160,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def findUser(id: Int): String = {
   db.findUser(id) match {
     case Some(x) => x
@@ -175,7 +175,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:silent
 def toString(id: Int): String = id match {
   case 1 => "one"
 }
@@ -185,7 +185,7 @@ Is this pure?
 
 # Examples
 
-```tut:silent
+```scala mdoc:nest:silent
 def toString(id: Int): String = id match {
   case 1 => "one"
 }
@@ -199,7 +199,7 @@ Is this pure?
 
 Yesterday we implemented a binary tree
 
-```tut:silent
+```scala mdoc:silent
 sealed trait Tree[A]
 case class Empty[A]() extends Tree[A]
 case class Node[A](
@@ -210,7 +210,7 @@ case class Node[A](
 
 # Recap
 
-```tut:silent
+```scala mdoc:silent
 val myTree = Node(
   Node(Empty(), 2, Empty()),
   1,
@@ -234,7 +234,7 @@ exercises, you'll see that there's a pattern:
 
 # Recap
 
-```tut
+```scala mdoc
 def height[A](tree: Tree[A]): Int =
   tree match {
     case Empty() => 0
@@ -247,7 +247,7 @@ height(myTree)
 
 # Recap
 
-```tut
+```scala mdoc
 def sum(tree: Tree[Int]): Int = tree match {
   case Empty() => 0
   case Node(l, x, r) => x + sum(l) + sum(r)
@@ -258,7 +258,7 @@ sum(myTree)
 
 # Recap
 
-```tut
+```scala mdoc
 def count[A](tree: Tree[A]): Int =
   tree match {
     case Empty() => 0
@@ -271,7 +271,7 @@ count(myTree)
 
 # Recap
 
-```tut
+```scala mdoc
 def toStringNodes(tree: Tree[Int]): Tree[String] =
   tree match {
     case Empty() => Empty()
@@ -287,7 +287,7 @@ toStringNodes(myTree)
 
 # Recap
 
-```tut
+```scala mdoc
 def squared(tree: Tree[Int]): Tree[Int] =
   tree match {
     case Empty() => Empty()
@@ -325,7 +325,7 @@ Folds consume structures and create values out of them.
 
 # fold
 
-```tut
+```scala mdoc
 def fold[A, B](tree: Tree[A])(
   onEmpty: B,
   onNode: (B, A, B) => B
@@ -343,7 +343,7 @@ def fold[A, B](tree: Tree[A])(
 
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
-```tut
+```scala mdoc
 def heightWithFold[A](tree: Tree[A]): Int =
   fold(tree)(0, { (l: Int, _: A, r: Int) =>
     1 + (l.max(r))
@@ -357,7 +357,7 @@ heightWithFold(myTree)
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
 
-```tut
+```scala mdoc
 def sumWithFold(tree: Tree[Int]): Int =
   fold(tree)(0, { (l: Int, a: Int, r: Int) =>
     l + a + r
@@ -370,7 +370,7 @@ sumWithFold(myTree)
 
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
-```tut
+```scala mdoc
 def countWithFold[A](tree: Tree[A]): Int =
   fold(tree)(0, { (l: Int, _: A, r: Int) =>
     1 + l + r
@@ -383,7 +383,7 @@ countWithFold(myTree)
 
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
-```tut
+```scala mdoc
 def toStringNodesWithFold(tree: Tree[Int]): Tree[String] =
   fold(tree)(Empty[String](), { (l: Tree[String], a: Int, r: Tree[String]) =>
     Node[String](l, a.toString, r)
@@ -396,7 +396,7 @@ toStringNodesWithFold(myTree)
 
 Now that we have created the `fold` function, let's reimplement the other functions based on it!
 
-```tut
+```scala mdoc
 def squaredWithFold(tree: Tree[Int]): Tree[Int] =
   fold(tree)(Empty[Int](), { (l: Tree[Int], a: Int, r: Tree[Int]) =>
     Node[Int](l, a * a, r)
@@ -415,7 +415,7 @@ That's a `map`! and we can implement it based on `fold`!
 
 # abstraction
 
-```tut
+```scala mdoc
 def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] =
   fold(tree)(Empty[B](), { (l: Tree[B], a: A, r: Tree[B]) =>
     Node[B](l, fn(a), r)
@@ -426,7 +426,7 @@ def map[A, B](tree: Tree[A])(fn: A => B): Tree[B] =
 
 And finally, implement those based on `map`!
 
-```tut
+```scala mdoc
 def toStringNodesWithMap(tree: Tree[Int]): Tree[String] =
   map(tree)(_.toString)
 
@@ -437,7 +437,7 @@ toStringNodesWithMap(myTree)
 
 And finally, implement those based on `map`!
 
-```tut
+```scala mdoc
 def squaredWithMap(tree: Tree[Int]): Tree[Int] =
   map(tree)(x => x*x)
 
@@ -456,7 +456,7 @@ all cases.
 In Scala, we have already seen how to implement generics, we use
 **square brackets** to suround the generic parameters.
 
-```tut:silent
+```scala mdoc:silent
 class Container[A](value: A)
 
 def testGeneric[A](value: Int): A = ???
@@ -467,7 +467,7 @@ def testGeneric[A](value: Int): A = ???
 In the same way we have abstracted over types, we can abstract our
 functions over type constructors, or Higher Kinded Types:
 
-```tut
+```scala mdoc
 def fn[M[_], A, B](
   ma: M[A]
 )(
@@ -491,7 +491,7 @@ There are some well know abstractions we should be aware of
 `fold` consumes a structure (`Tree` in our case) and produces a value
 out of it.
 
-```tut:silent
+```scala mdoc:nest:silent
 def fold[F[_], A, B](
   f: F[A]
 )(
@@ -506,7 +506,7 @@ def fold[F[_], A, B](
 
 `map` transforms each element given a function `A => B`
 
-```tut:silent
+```scala mdoc:nest:silent
 def map[F[_], A, B](f: F[A])(fn: A => B): F[B] = ???
 ```
 
@@ -517,7 +517,7 @@ def map[F[_], A, B](f: F[A])(fn: A => B): F[B] = ???
 `flatMap` is similar to `map`, but the lambda we pass to it returns a
 `F[B]` instead of a `B`
 
-```tut:silent
+```scala mdoc:silent
 def flatMap[F[_], A, B](f: F[A])(fn: A => F[B]): F[B] = ???
 ```
 
@@ -528,7 +528,7 @@ def flatMap[F[_], A, B](f: F[A])(fn: A => F[B]): F[B] = ???
 `filter` returns a new structure `F[_]` with elements that doesn't adjust to a
 predicate `fn: A => Boolean` filtered out.
 
-```tut:silent
+```scala mdoc:silent
 def filter[F[_], A](f: F[A])(fn: A => Boolean): F[A] = ???
 ```
 
@@ -538,8 +538,8 @@ def filter[F[_], A](f: F[A])(fn: A => Boolean): F[A] = ???
 
 `find` returns the first element in a structure `F[_]` that matches a predicate.
 
-```tut:silent
-def filter[F[_], A](f: F[A])(fn: A => Boolean): Option[A] = ???
+```scala mdoc:silent
+def find[F[_], A](f: F[A])(fn: A => Boolean): Option[A] = ???
 ```
 
 # functional datatypes
@@ -553,14 +553,14 @@ with common tasks.
 
 Option is used when something may be not present. Use it whenever you'd use null `null`.
 
-```tut:invisible
+```scala mdoc:invisible
 val hostDefined = false
 val getHost = ""
 ```
 
 ## With `nulls`
 
-```tut:silent
+```scala mdoc:silent
 def httpConnection: String = {
   if (hostDefined) {
     getHost
@@ -576,8 +576,8 @@ Option is used when something may be not present. Use it whenever you'd use null
 
 ## With `Option`
 
-```tut:silent
-def httpConnection: Option[String] = {
+```scala mdoc:silent
+def httpConnectionWithOption: Option[String] = {
   if (hostDefined) {
     Some(getHost)
   } else {
@@ -605,7 +605,7 @@ normal values instead of bubbling on their own.
 
 ## Without `Try`:
 
-```tut
+```scala mdoc:silent
 def user: String = try {
   findUser(3)
 } catch {
@@ -618,10 +618,10 @@ def user: String = try {
 
 ## With `Try`:
 
-```tut
+```scala mdoc:silent
 import scala.util.Try
 
-def user: Try[String] = Try(findUser(3))
+def userWithTry: Try[String] = Try(findUser(3))
 ```
 
 # Either
@@ -631,7 +631,7 @@ One of the many use cases for `Either` is validations:
 
 ## Without Either
 
-```tut
+```scala mdoc:silent
 case class ValidationError() extends Exception()
 
 def validatePhone(
@@ -647,8 +647,8 @@ def validatePhone(
 
 ## With Either:
 
-```tut
-def validatePhone(
+```scala mdoc:silent
+def validatePhoneWithEither(
   phone: String
 ): Either[ValidationError, String] =
   if (phone.length == 9) {
@@ -669,7 +669,7 @@ thread.
 
 ## Without `Future`
 
-```tut:silent
+```scala mdoc:silent
 val callDB: Runnable = new Runnable {
   def run(): Unit = {
     db.findUser(3)
@@ -683,11 +683,11 @@ new Thread(callDB).start
 
 ## with `Future`
 
-```tut:silent
+```scala mdoc:silent
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-val callDB: Future[String] = Future(findUser(3))
+val callDBFuture: Future[String] = Future(findUser(3))
 ```
 
 # Exercise 4
