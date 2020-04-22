@@ -2,10 +2,11 @@
 
 PANDOC = pandoc
 SBT = sbt
+HIGHLIGHT_STYLE=tango
 
 basics1:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/basics1.md -o slides/basics1.pdf
@@ -13,7 +14,7 @@ basics1:
 
 basics2:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/basics2.md -o slides/basics2.pdf
@@ -21,7 +22,7 @@ basics2:
 
 abstraction1:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/abstraction1.md -o slides/abstraction1.pdf
@@ -29,7 +30,7 @@ abstraction1:
 
 typeclasses:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/typeclasses.md -o slides/typeclasses.pdf
@@ -37,7 +38,7 @@ typeclasses:
 
 scalacheck:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/scalacheck.md -o slides/scalacheck.pdf
@@ -45,7 +46,7 @@ scalacheck:
 
 implicits:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/implicits.md -o slides/implicits.pdf
@@ -53,7 +54,7 @@ implicits:
 
 dsls:
 	@$(PANDOC) -t beamer \
-             --highlight-style=zenburn \
+             --highlight-style=$(HIGHLIGHT_STYLE) \
              --pdf-engine=xelatex \
              --from markdown \
              docs/tut-out/dsls.md -o slides/dsls.pdf
@@ -63,3 +64,5 @@ tut:
 	$(SBT) docs/mdoc
 
 all: tut basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
+
+pandoc_all: basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
