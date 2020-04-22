@@ -22,8 +22,8 @@ project/plugins/project/
 
 # End of https://www.gitignore.io/api/sbt,scala
 
-docs/tut-out/*.md
-docs/tut-out/*.html
+docs/mdoc-out/*.md
+docs/mdoc-out/*.html
 
 server/src/main/resources/*.html
 .idea
