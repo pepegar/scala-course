@@ -43,5 +43,5 @@ lazy val docs = project
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.5"),
     mdocIn := baseDirectory.value / "tut",
     mdocOut := baseDirectory.value / "tut-out",
-    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4")
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.0")
   .enablePlugins(MdocPlugin)
