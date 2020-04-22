@@ -117,3 +117,53 @@ The most common way of using typeclasses in Scala is by passing their
 instances as implicit parameters.
 
 [typeclasses]: https://github.com/pepegar/scala-course/blob/master/slides/typeclasses.pdf
+
+# Typeclasses
+
+## Typeclass declaration
+
+```scala mdoc
+trait ToString[A] {
+  def toString(a: A): String
+}
+
+object ToString {
+  def apply[A](
+    implicit TS: ToString[A]
+  ): ToString[A] = TS
+}
+```
+
+# Typeclasses
+
+## Instance declaration
+
+```scala mdoc
+
+implicit val toStringInt: ToString[Int] =
+  new ToString[Int] {
+    def toString(a: Int): String =
+      a.toString
+  }
+
+// Scala can also use Single Abstract Method syntax,
+// as Java
+implicit val toStringFloat: ToString[Float] =
+  _.toString
+```
+
+# Typeclasses
+
+## Usage
+
+```scala mdoc
+def print[A: ToString](a: A): Unit =
+  println(ToString[A].toString(a))
+
+print(1)
+print(2f)
+```
+
+```scala mdoc:fail
+print(true)
+```
