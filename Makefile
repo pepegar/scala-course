@@ -63,6 +63,6 @@ taglessfinal:
 mdoc:
 	$(SBT) docs/mdoc
 
-all: mdoc basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
+all: mdoc basics1 basics2 abstraction1 typeclasses scalacheck implicits taglessfinal
 
-pandoc_all: basics1 basics2 abstraction1 typeclasses scalacheck implicits dsls
+pandoc_all: basics1 basics2 abstraction1 typeclasses scalacheck implicits taglessfinal
