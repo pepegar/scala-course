@@ -25,25 +25,11 @@ object Exercise4 {
   /**
     * reimplement this using Option
     */
-  def useOption = Option(maybeString)
-
-  /**
-    * reimplement this using try
-    */
-  def useTry = Try(stringOrThrow)
-
-
-
-  case class Client()
-  case class User()
-
-  /**
-    * reimplement using Either[User, Client]
-    */
-  def userOrClient: Either[User, Client] = if (hasBoughtBefore) {
-    Right(Client())
-  } else {
-    Left(User())
-  }
+  def useOption =
+    if (maybeString == null) {
+      null
+    } else {
+      maybeString
+    }
 
 }
