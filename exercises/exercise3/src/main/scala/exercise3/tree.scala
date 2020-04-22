@@ -18,4 +18,13 @@ object Tree {
     )
   }
 
+  /**
+    * Refactor all the functions we implemented with primitive recursion
+    */
+  def height[A](tree: Tree[A]): Int = ???
+
+  def sum(tree: Tree[Int]): Int = ???
+
+  def count[A](tree: Tree[A]): Int = ???
+
 }
