@@ -73,6 +73,7 @@ object typeclasses {
   /**
     * Abstract this function further
     */
-  def sumX[F[_]](f: F[Int])(implicit F: Foldable[F]): Int =
-    F.foldLeft(f, 0)(_ + _)
+  def sumX[F[_], A](f: F[A])(implicit F: Foldable[F], A: Monoid[A]): A =
+    F.foldLeft(f, A.empty)((x, y) => A.combine(x, y))
+
 }
