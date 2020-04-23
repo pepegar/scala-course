@@ -14,5 +14,9 @@ object typeclasses {
       exercise3.Tree.map(fa)(f)
   }
 
+  /**
+    * create a Foldable instance for our binary tree
+    */
+  implicit val treeFoldable: Foldable[Tree] = ???
 
 }
