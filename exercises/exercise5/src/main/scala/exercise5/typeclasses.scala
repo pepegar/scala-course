@@ -37,10 +37,11 @@ object typeclasses {
   case class Just[A](a: A) extends Maybe[A]
 
   implicit val maybeMonad: Monad[Maybe] = new Monad[Maybe] {
-    def pure[A](x: A): Maybe[A] = ???
-
-    def flatMap[A, B](fa: Maybe[A])(f: A => Maybe[B]): Maybe[B] = ???
-
+    def pure[A](x: A): Maybe[A] = Just(x)
+    def flatMap[A, B](fa: Maybe[A])(f: A => Maybe[B]): Maybe[B] = fa match {
+      case Nothing() => Nothing[B]()
+      case Just(a) => f(a)
+    }
 
     // This method was not originally part of the Monad typeclass, is added
     // here for performance
