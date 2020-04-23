@@ -54,4 +54,16 @@ object typeclasses {
       }
   }
 
+  /**
+    * Parametrize the following functions to work on typeclasses, not
+    * directly on trees.
+    */
+  def sum[F[_]](f: Tree[Int]): Int = ???
+
+  def count[Tree[_], A](f: Tree[A]): Int = ???
+
+  def toStringNodes[Tree[_]](f: Tree[Int]): Tree[String] = ???
+
+  def squared[Tree[_]](f: Tree[Int]): Tree[Int] = ???
+
 }
