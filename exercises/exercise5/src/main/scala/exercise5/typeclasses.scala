@@ -58,12 +58,16 @@ object typeclasses {
     * Parametrize the following functions to work on typeclasses, not
     * directly on trees.
     */
-  def sum[F[_]](f: Tree[Int]): Int = ???
+  def sum[F[_]](f: F[Int])(implicit F: Foldable[F]): Int =
+    F.foldLeft(f, 0)(_ + _)
 
-  def count[Tree[_], A](f: Tree[A]): Int = ???
+  def count[F[_], A](f: F[A])(implicit F: Foldable[F]): Int =
+    F.foldLeft(f, 0)((acc, c) => acc + 1)
 
-  def toStringNodes[Tree[_]](f: Tree[Int]): Tree[String] = ???
+  def toStringNodes[F[_]](f: F[Int])(implicit F: Functor[F]): F[String] =
+    F.map(f)(_.toString)
 
-  def squared[Tree[_]](f: Tree[Int]): Tree[Int] = ???
+  def squared[F[_]](f: F[Int])(implicit F: Functor[F]): F[Int] =
+    F.map(f)(x => x * x)
 
 }
