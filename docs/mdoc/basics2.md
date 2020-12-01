@@ -206,11 +206,12 @@ def sum(list: MyList[Int]): Int =
 
 # Exercise 2.1
 
-Implement a generic binary tree data structure.
+Implement a generic binary tree data structure.  There are **two possible cases** for binary trees:
 
-# Exercise 2.1
+- Empty binary trees
+- Binary trees with a value and pointers to left and right
 
-Implement a generic binary tree data structure.
+. . .
 
 ## Solution
 
@@ -228,9 +229,7 @@ case class Node[A](
 
 create a function to calculate the height of a tree.
 
-# Exercise 2.2
-
-create a function to calculate the height of a tree.
+. . .
 
 ## Solution
 
@@ -245,9 +244,7 @@ def height[A](tree: Tree[A]): Int = tree match {
 
 Create a function that sums all the leaves of an Int tree.
 
-# Exercise 2.3
-
-Create a function that sums all the leaves of an Int tree.
+. . .
 
 ## Solution
 
@@ -263,9 +260,7 @@ def sum(tree: Tree[Int]): Int = tree match {
 
 Create a function that counts all the leaves in a tree
 
-# Exercise 2.4
-
-Create a function that counts all the leaves in a tree
+. . .
 
 ## Solution
 
@@ -281,10 +276,7 @@ def count[A](tree: Tree[A]): Int = tree match {
 Create a function that transforms each element in a tree into it's
 string representation
 
-# Exercise 2.5
-
-Create a function that transforms each element in a tree into it's
-string representation
+. . .
 
 ## Solution
 
@@ -303,9 +295,7 @@ def toStringNodes(tree: Tree[Int]): Tree[String] = tree match {
 
 Create a function that squares all elements in an Int tree
 
-# Exercise 2.6
-
-Create a function that squares all elements in an Int tree
+. . .
 
 ## Solution
 
@@ -314,8 +304,8 @@ def squared(tree: Tree[Int]): Tree[Int] = tree match {
   case Empty() => Empty()
   case Node(l, x, r) => Node(
     squared(l),
-	x * x,
-	squared(r))
+  	x * x,
+	  squared(r))
 }
 ```
 
@@ -325,15 +315,11 @@ Scala allows us to express the variance of generic types.  They can
 either be invariant (all the generics we've seen are invariant),
 covariant, or contravariant.
 
-# Postscript: variance
-
-## Covariance
+# Postscript: Covariance
 
 We express Covariance adding a `+` sign before the generic parameter name.
 
-# Postscript: variance
-
-## Covariance
+# Postscript: Covariance
 
 Let `CList` be a type constructor declared as:
 
@@ -344,9 +330,7 @@ trait CList[+A]
 If we have two types `Foo` and `Bar`,and `Foo` is a subtype of `Bar`,
 since `CList` is covariant, `CList[Foo]` is a subtype of `CList[Bar]`.
 
-# Postscript: variance
-
-## Contravariance
+# Postscript: Contravariance
 
 Contravariance is similar to covariance, but the inverse.  If we
 declare a type constructor as contravariant:
@@ -358,9 +342,7 @@ trait Logger[-A]
 We mean that, for two types `Foo` and `Bar` if `Foo` is a subtype of
 `Bar`, then `CList[Bar]` is a subtype of `CList[Foo]`
 
-# Postscript: variance
-
-## Contravariance
+# Postscript: Contravariance
 
 ```scala mdoc:silent
 class Fruit

@@ -34,3 +34,4 @@ project/metals.sbt
 .bsp
 .vscode
 metals.sbt
+.DS_Store

@@ -26,10 +26,10 @@ given the same input, always return the same output
 
 ## Side effects
 
-- Throwing exceptions
-- IO
-- mutating variables
-- Random
+>- Throwing exceptions
+>- IO
+>- mutating variables
+>- Random
 
 # Referential transparency
 
@@ -56,22 +56,14 @@ When a function is not total, we say it's partial.
 def sum(a: Int, b: Int): Int = a + b
 ```
 
-Is this pure?
-
-# Examples
-
-```scala mdoc:nest:silent
-def sum(a: Int, b: Int): Int = a + b
-```
-
-Is this pure?
+. . .
 
 **yes**
 
 # Examples
 
 ```scala mdoc:nest:silent
-def sum(a: Int, b: Int): Int = {
+def sumAndPrint(a: Int, b: Int): Int = {
   println(s"summing $a + $b")
   a + b
 }
@@ -79,16 +71,7 @@ def sum(a: Int, b: Int): Int = {
 
 Is this pure?
 
-# Examples
-
-```scala mdoc:nest:silent
-def sum(a: Int, b: Int): Int = {
-  println(s"summing $a + $b")
-  a + b
-}
-```
-
-Is this pure?
+. . .
 
 **Nope, it's side effectful!**
 
@@ -107,16 +90,7 @@ def operation(): Unit = {
 
 Is this pure?
 
-# Examples
-
-```scala mdoc:nest:silent
-def operation(): Unit = {
-  launchMissiles()
-  ()
-}
-```
-
-Is this pure?
+. . .
 
 **Nope, it's side effectful!**
 
@@ -128,13 +102,7 @@ def findPhone(name: String): Option[String] = None
 
 Is this pure?
 
-# Examples
-
-```scala mdoc:nest:silent
-def findPhone(name: String): Option[String] = None
-```
-
-Is this pure?
+. . .
 
 **Yes!**
 
@@ -150,25 +118,14 @@ object db {
 def findUser(id: Int): String = {
   db.findUser(id) match {
     case Some(x) => x
-  case None => throw new Exception("No user found")
+    case None => throw new Exception("No user found")
   }
 }
 ```
 
 Is this pure?
 
-# Examples
-
-```scala mdoc:nest:silent
-def findUser(id: Int): String = {
-  db.findUser(id) match {
-    case Some(x) => x
-  case None => throw new Exception("No user found")
-  }
-}
-```
-
-Is this pure?
+. . .
 
 **Nope, it's side effectful!**
 
@@ -182,15 +139,7 @@ def toString(id: Int): String = id match {
 
 Is this pure?
 
-# Examples
-
-```scala mdoc:nest:silent
-def toString(id: Int): String = id match {
-  case 1 => "one"
-}
-```
-
-Is this pure?
+. . .
 
 **Nope, it's partial!**
 
@@ -308,8 +257,8 @@ previous functions?
 
 # Identifying common functions
 
-The pattern we've identified here is called `fold`, or more
-specifically, `catamorphism`.
+The pattern we've identified here is called `fold` (AKA `reduce`, `cata`,
+`catamorphism`...)
 
 Folds consume structures and create values out of them.
 
