@@ -1,9 +1,12 @@
+{ java ? "openjdk14" }:
+
 let
-  pkgs = import <nixpkgs> {};
+  sources = import ./nix/sources.nix;
+  pkgs = import sources.nixpkgs {};
 in
 pkgs.mkShell {
   buildInputs = [
-    pkgs.jdk8
+    pkgs.${java}
     pkgs.sbt
     pkgs.pandoc
     pkgs.entr
