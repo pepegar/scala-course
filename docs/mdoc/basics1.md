@@ -8,83 +8,30 @@ date: 2020-04-20
 
 ## Scala?
 
-# Scala Basics
-
-## Scala?
-
-- Object Oriented/Functional Language
-
-# Scala Basics
-
-## Scala?
-
-- Object Oriented/Functional Language
-- Static typing
-
-# Scala Basics
-
-## Scala?
-
-- Object Oriented/Functional Language
-- Static typing
-- Type inference
-
-# Scala Basics
-
-## Scala?
-
-- Object Oriented/Functional Language
-- Static typing
-- Type inference
-- Functional programming capabilities
+>- Object Oriented/Functional Language
+>- Static typing
+>- Type inference
+>- Functional programming capabilities
 
 # Scala Basics
 
 ## Why object oriented?
 
-- Subtyping polymorphism
-- Everything's an object
-- Inheritance
+>- Subtyping polymorphism
+>- Everything's an object
+>- Inheritance
 
 # Scala Basics
 
 ## Why functional?
 
-- Functions are _first class citizens_
+>- Functions are _first class citizens_
+>- Pattern matching
+>- Algebraic Data Types
+>- Higher kinded types
+>- inmutability
 
-# Scala Basics
-
-## Why functional?
-
-- Functions are _first class citizens_
-- Pattern matching
-
-# Scala Basics
-
-## Why functional?
-
-- Functions are _first class citizens_
-- Pattern matching
-- Algebraic Data Types
-
-# Scala Basics
-
-## Why functional?
-
-- Functions are _first class citizens_
-- Pattern matching
-- Algebraic Data Types
-- Higher kinded types
-
-# Scala Basics
-
-## Why functional?
-
-- Functions are _first class citizens_
-- Pattern matching
-- Algebraic Data Types
-- Higher kinded types
-- inmutability
+. . .
 
 _This is the cool part, and what we'll be learning about_
 
@@ -99,34 +46,66 @@ sense.
 
 # Static typing
 
-##
+::: columns
+:::: {.column width=50%}
 
 Static typing means that once a variable has a type, it cannot change.
 The opposite of static typing is dynamic typing, as in Python, JS...
 
-## Python
+::::
+:::: {.column width=50%}
+
+**Python**
 
 ```python
 a = "patata"
 a = 3
 ```
 
-## JS
+::::
+:::
+
+# Static typing
+
+::: columns
+:::: {.column width=50%}
+
+Static typing means that once a variable has a type, it cannot change.
+The opposite of static typing is dynamic typing, as in Python, JS...
+
+::::
+:::: {.column width=50%}
+
+**JS**
 
 ```javascript
 var a = "patata"
 a = 3
 ```
 
-## Scala
+::::
+:::
 
-```scala mdoc:silent
-var a = "patata"
-```
+# Static typing
+
+::: columns
+:::: {.column width=50%}
+
+Static typing means that once a variable has a type, it cannot change.
+The opposite of static typing is dynamic typing, as in Python, JS...
+
+::::
+:::: {.column width=50%}
+
+**Scala**
 
 ```scala mdoc:fail
+var a = "patata"
 a = 3
 ```
+
+::::
+:::
 
 # Type inference
 
@@ -139,9 +118,9 @@ val three = 3
 ```
 
 This doesn't mean that if we don't specify a type the declaration
-remains untyped, just that we let the compiler guess it.
+remains untyped, just that we let the compiler guesses it.
 
-# Functions
+# Higher order functions
 
 Functions being first class citizens means that they can be used as
 any other value in your program.  They have types, they can be
@@ -155,13 +134,11 @@ val intToString: Int => String = { a =>
 }
 ```
 
-# Functions
+# Higher order functions
 
 Functions being first class citizens means that they can be used as
 any other value in your program.  They have types, they can be
 returned and they can be taken as parameters.
-
-## Functions can be taken as parameters
 
 ```scala mdoc:silent
 def applyFunction(
@@ -174,15 +151,11 @@ applyFunction(3, {x => x*3})
 applyFunction(2, {x => x+2})
 ```
 
-
-# Functions
+# Higher order functions
 
 Functions being first class citizens means that they can be used as
 any other value in your program.  They have types, they can be
 returned and they can be taken as parameters.
-
-## Functions can be returned!
-
 
 ```scala mdoc:silent
 def genMultiplication(
@@ -271,6 +244,9 @@ lengthIsEven("1000")
 Algebraic data types are composite types made up from smaller ones.
 There are two basic constructs for them:
 
+- case classes
+- sealed traits
+
 # Case classes
 
 case classes (also called **product types**) encode a grouping of other
@@ -339,7 +315,7 @@ either a `OkResponse` or a `FailureResponse`.
 
 # Exercise 1.1
 
-Let's imagine a simple event sourced application.  We want to define
+Let's imagine a simple event based application.  We want to define
 some events that we can handle:
 
 - An user logs in
@@ -394,5 +370,4 @@ case class PaymentCorrect(id: UUID, userId: UUID, paymentReceipt: String) extend
 sealed trait PaymentFailure extends Event
 case class TimeoutFailure(id: UUID, userId: UUID, intentId: UUID) extends PaymentFailure
 case class InsufficentFundsFailure(id: UUID, userId: UUID, inteintId: UUID) extends PaymentFailure
-
 ```

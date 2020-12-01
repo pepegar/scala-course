@@ -15,7 +15,7 @@ $(output)/%.pdf: $(source)/%.md
 		--highlight-style tango \
 		-o $@
 
-all: $(objects) mdoc
+all: mdoc $(objects)
 
 mdoc:
 	$(sbt) docs/mdoc
