@@ -1,10 +1,9 @@
 ---
-title: Tagless Final
+title: Scala Course
+subtitle: Tagless Final
 author: Pepe García
-date: 2020-04-20
-subject: Scala
-keywords: [FP, Scala]
-lang: "en"
+email: pepe@pepegar.com
+date: 2020-12-01
 ---
 
 # Tagless Final

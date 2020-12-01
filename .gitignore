@@ -31,3 +31,6 @@ server/src/main/resources/*.html
 .bloop
 project/.bloop
 project/metals.sbt
+.bsp
+.vscode
+metals.sbt

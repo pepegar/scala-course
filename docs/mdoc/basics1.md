@@ -1,7 +1,9 @@
 ---
-title: Scala Basics 1
+title: Scala Course
+subtitle: Basics 1
 author: Pepe García
-date: 2020-04-20
+email: pepe@pepegar.com
+date: 2020-12-01
 ---
 
 # Scala Basics
@@ -304,7 +306,7 @@ either a `OkResponse` or a `FailureResponse`.
 
 
 | Scala        | Other languages                       |
-|--------------|---------------------------------------|
+| ------------ | ------------------------------------- |
 | `trait`      | `interface`(Java), `protocol` (Swift) |
 | `class`      | `class`                               |
 | `case class` | `POJO/JavaBean` (Java)                |
