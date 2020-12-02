@@ -35,3 +35,4 @@ project/metals.sbt
 .vscode
 metals.sbt
 .DS_Store
+worksheet.sc
